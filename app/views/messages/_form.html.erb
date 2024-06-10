@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "#{dom_id(chat)}_message_form" do %>
+  <%= form_with(model: Message.new, url: [chat, chat.messages.new]) do |form| %>
+    <div class="my-5">
+      <%= form.text_area :content, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", autofocus: true, "x-on:keydown.cmd.enter" => "$event.target.form.requestSubmit();" %>
+    </div>
+
+    <div class="grid justify-items-end">
+      <%= form.button "Send", type: :submit, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    </div>
+  <% end %>
+<% end %>

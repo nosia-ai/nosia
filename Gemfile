@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+# Nosia dependency
+gem "dotenv", groups: [:development, :test]
+
 # Use main development branch of Rails
 gem "rails", github: "rails/rails", branch: "main"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
@@ -60,3 +63,13 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Nosia dependencies
+gem "faraday"
+gem "langchainrb"
+gem "langchainrb_rails"
+gem "neighbor"
+gem "pdf-reader"
+gem "pgvector", "~> 0.2"
+gem "sequel", "~> 5.68.0"
+gem "solid_queue"
