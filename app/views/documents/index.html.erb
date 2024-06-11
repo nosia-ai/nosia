@@ -29,7 +29,7 @@
               </h3>
             </div>
             <p class="mt-1 truncate text-sm text-slate-500">
-            <%= document.content.first(50) %>
+            <%= document.content&.first(50) %>
             </p>
           <% end %>
           <button
