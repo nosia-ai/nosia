@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+if command -v ollama &> /dev/null; then
+  echo "ollama is already installed"
+  exit 0
+fi
+
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama3

@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+./script/dev/setup-postgresql
+./script/dev/setup-asdf
+./script/dev/setup-ruby
+./bin/setup
+./script/ollama/setup

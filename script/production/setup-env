@@ -1,0 +1,30 @@
+#!/bin/bash -e
+
+if [ -f .env ]; then
+  echo ".env file already exists"
+  exit 0
+fi
+
+echo "Generating .env file"
+
+OLLAMA_URL=http://localhost:11434
+OLLAMA_MODEL=llama3
+POSTGRES_HOST=postgres-db
+POSTGRES_PORT=5432
+POSTGRES_DB=nosia_production
+POSTGRES_USER=nosia
+POSTGRES_PASSWORD=$(openssl rand -base64 32)
+DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
+RAILS_MASTER_KEY=$RAILS_MASTER_KEY
+
+echo "DATABASE_URL=$DATABASE_URL" > .env
+echo "OLLAMA_URL=$OLLAMA_URL" >> .env
+echo "OLLAMA_MODEL=$OLLAMA_MODEL" >> .env
+echo "POSTGRES_HOST=$POSTGRES_HOST" >> .env
+echo "POSTGRES_PORT=$POSTGRES_PORT" >> .env
+echo "POSTGRES_DB=$POSTGRES_DB" >> .env
+echo "POSTGRES_USER=$POSTGRES_USER" >> .env
+echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
+echo "RAILS_MASTER_KEY=$RAILS_MASTER_KEY" >> .env
+
+echo ".env file generated"

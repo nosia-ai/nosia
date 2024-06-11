@@ -56,6 +56,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Nosia dependencies
+  gem "dockerfile-rails"
 end
 
 group :test do
@@ -73,3 +76,5 @@ gem "pdf-reader"
 gem "pgvector", "~> 0.2"
 gem "sequel", "~> 5.68.0"
 gem "solid_queue"
+gem "thruster"
+gem "tiktoken_ruby"
