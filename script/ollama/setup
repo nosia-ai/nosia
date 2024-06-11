@@ -6,4 +6,4 @@ if command -v ollama &> /dev/null; then
 fi
 
 curl -fsSL https://ollama.com/install.sh | sh
-ollama pull llama3
+ollama pull mistral

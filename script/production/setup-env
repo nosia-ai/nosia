@@ -8,7 +8,7 @@ fi
 echo "Generating .env file"
 
 OLLAMA_URL=http://localhost:11434
-OLLAMA_MODEL=llama3
+OLLAMA_MODEL=mistral
 POSTGRES_HOST=postgres-db
 POSTGRES_PORT=5432
 POSTGRES_DB=nosia_production
