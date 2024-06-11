@@ -1,11 +1,15 @@
 <div id="<%= dom_id(message) %>_messages">
-  <% if false # message.user? %>
-    <div class="bg-sky-400 rounded-lg m-8 text-white p-4">
-      <%= message.content %>
+  <% if message.user? %>
+    <div class="flex flex-row px-2 py-4 sm:px-4">
+      <div class="flex max-w-3xl items-center">
+        <%= message.content %>
+      </div>
     </div>
   <% else %>
-    <div class="bg-gray-200 rounded-lg m-8 p-4">
-      <%= message.content %>
+    <div class="mb-4 flex rounded-xl bg-slate-50 px-2 py-6 dark:bg-slate-900 sm:px-4">
+      <div class="flex max-w-3xl items-center rounded-xl">
+        <%= message.content %>
+      </div>
     </div>
   <% end %>
 </div>

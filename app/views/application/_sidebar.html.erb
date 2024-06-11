@@ -1,0 +1,60 @@
+<aside class="flex">
+  <div class="flex h-[100svh] w-60 flex-col overflow-y-auto bg-slate-50 pt-8 dark:border-slate-700 dark:bg-slate-900 sm:h-[100vh] sm:w-64">
+    <div class="flex px-4">
+      <h2 class="px-5 text-lg font-medium text-slate-800 dark:text-slate-200">
+        Chats
+        <span class="mx-2 rounded-full bg-blue-600 px-2 py-1 text-xs text-slate-200"><%= Chat.count %></span>
+      </h2>
+    </div>
+    <div class="mx-2 mt-8">
+      <%= button_to chats_path, class: "flex w-full gap-x-4 rounded-lg border border-slate-300 p-4 text-left text-sm font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-200 focus:outline-none dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800" do %>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 5l0 14"></path>
+            <path d="M5 12l14 0"></path>
+        </svg>
+        New Chat
+      <% end %>
+    </div>
+    <div class="h-1/2 space-y-4 overflow-y-auto border-b border-slate-300 px-2 py-4 dark:border-slate-700">
+      <% Chat.all.order(updated_at: :desc).each do |chat| %>
+        <%= link_to chat, class: "flex w-full flex-col gap-y-2 rounded-lg px-3 py-2 text-left transition-colors duration-200 hover:bg-slate-200 focus:outline-none dark:hover:bg-slate-800" do %>
+          <h1 class="text-sm font-medium text-slate-700 dark:text-slate-200 truncate">
+            <%= chat.first_question&.first(50) %>
+          </h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400"><%= l(chat.updated_at, format: :short) %></p>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="mt-auto w-full space-y-4 px-2 py-4">
+      <%= link_to documents_path, class: "flex w-full gap-x-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-200 focus:outline-none dark:text-slate-200 dark:hover:bg-slate-800" do %>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path
+                d="M19.875 6.27a2.225 2.225 0 0 1 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z"
+                ></path>
+            <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+        </svg>
+        Documents
+      <% end %>
+    </div>
+  </div>
+</aside>

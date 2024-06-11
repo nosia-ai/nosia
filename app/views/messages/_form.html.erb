@@ -1,11 +1,9 @@
 <%= turbo_frame_tag "#{dom_id(chat)}_message_form" do %>
-  <%= form_with(model: Message.new, url: [chat, chat.messages.new]) do |form| %>
-    <div class="my-5">
-      <%= form.text_area :content, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", autofocus: true, "x-on:keydown.cmd.enter" => "$event.target.form.requestSubmit();" %>
-    </div>
-
-    <div class="grid justify-items-end">
-      <%= form.button "Send", type: :submit, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  <%= form_with(model: Message.new, url: [chat, chat.messages.new], class: "mt-2") do |form| %>
+    <%= form.label :content, "Enter your prompt", class: "sr-only" %>
+    <div class="relative">
+      <%= form.text_area :content, rows: 4, class: "block w-full resize-none rounded-xl border-none bg-slate-200 p-4 pl-10 pr-20 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-400 dark:focus:ring-blue-500 sm:text-base", placeholder: "Enter your prompt", rows: 1, autofocus: true, "x-on:keydown.cmd.enter" => "$event.target.form.requestSubmit();" %>
+      <%= form.button "Send", type: :submit, class: "absolute bottom-2 right-2.5 rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-slate-200 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:text-base" %>
     </div>
   <% end %>
 <% end %>

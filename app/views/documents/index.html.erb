@@ -7,21 +7,53 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Documents</h1>
-    <div class="flex space-x-5">
-      <%= button_to "New chat", chats_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-      <%= link_to "New document", new_document_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-    </div>
+    <%= link_to "New document", new_document_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div data-controller="dropzone" class="dropzone dropzone-default dz-clickable my-5">
+  <div data-controller="dropzone" class="dropzone dropzone-default dz-clickable my-5 col-span-1 rounded-lg bg-slate-50 shadow dark:bg-slate-900">
   </div>
 
-  <div id="documents" class="min-w-full">
-    <% @documents.each do |document| %>
-      <%= render document %>
-      <p>
-        <%= link_to "Show this document", document, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
+  <ul
+      role="list"
+      class="grid grid-cols-1 gap-6 text-slate-900 dark:text-slate-200 sm:grid-cols-2 lg:grid-cols-2"
+      >
+      <% @documents.each do |document| %>
+      <li class="col-span-1 rounded-lg bg-slate-50 shadow dark:bg-slate-900">
+        <div class="flex w-full items-center justify-between space-x-6 p-6">
+          <%= link_to document, class: "group flex-1 truncate" do %>
+            <div class="flex items-center space-x-3">
+              <h3
+                  class="truncate text-sm font-medium text-slate-900 transition-colors group-hover:text-blue-600 dark:text-slate-200 dark:group-hover:text-blue-600"
+                  >
+                  <%= document.title %>
+              </h3>
+            </div>
+            <p class="mt-1 truncate text-sm text-slate-500">
+            <%= document.content.first(50) %>
+            </p>
+          <% end %>
+          <button
+              class="flex flex-shrink-0 flex-col items-center gap-y-1 rounded-lg p-1 text-xs transition-colors hover:text-blue-600 focus:text-blue-600"
+              >
+              <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path
+                      d="M9 4h6a2 2 0 0 1 2 2v14l-5 -3l-5 3v-14a2 2 0 0 1 2 -2"
+                      ></path>
+              </svg>
+            <span></span>
+          </button>
+        </div>
+      </li>
     <% end %>
-  </div>
+  </ul>
 </div>
