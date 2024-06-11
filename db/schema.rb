@@ -66,14 +66,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_190554) do
     t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
-  create_table "products", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.vector "embedding", limit: 4096
-    t.string "title"
-    t.text "description"
-  end
-
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
     t.bigint "job_id", null: false
     t.string "queue_name", null: false
