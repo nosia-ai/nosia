@@ -69,8 +69,9 @@ end
 
 # Nosia dependencies
 gem "faraday"
-gem "langchainrb"
-gem "langchainrb_rails"
+gem "langchainrb", github: "patterns-ai-core/langchainrb", branch: "main"
+gem "langchainrb_rails", github: "patterns-ai-core/langchainrb_rails", branch: "main"
+gem "mission_control-jobs", github: "rails/mission_control-jobs", branch: "main"
 gem "neighbor"
 gem "pdf-reader"
 gem "pgvector", "~> 0.2"
