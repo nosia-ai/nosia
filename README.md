@@ -24,7 +24,8 @@ Replace `<HOST_IP>` with the IP address of the host machine and run the followin
 
 ```bash
 brew install ollama
-OLLAMA_URL=<HOST_IP>:11434 ollama
+ollama pull mistral
+OLLAMA_URL=<HOST_IP>:11434 ollama run mistral
 ```
 
 On the Debian/Ubuntu VM:
@@ -36,10 +37,15 @@ curl -fsSL https://gitd.fr/-/snippets/1/raw/main/ia.sh | OLLAMA_URL=<HOST_IP>:11
 ```
 
 You should see the following output:
+
 ✅ Setting up environment
+
 ✅ Setting up Docker
+
 ✅ Setting up Ollama
+
 ✅ Starting Ollama
+
 ✅ Starting Nosia
 
 Replace `<VM_IP>` with the IP address of the VM and you can now access Nosia at `http://<VM_IP>:3000`
