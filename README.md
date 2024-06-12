@@ -65,7 +65,7 @@ You can start and stop the services with the following commands:
 If you encounter any issues during the installation, you can check the logs with the following command:
 
 ```
-tail -f ./ia/logs/production.log
+tail -f ./ia/log/production.log
 ```
 
 If you encounter any issues with the AI, you can check the jobs at `http://<VM_IP>:3000/jobs`
