@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/patterns-ai-core/langchainrb.git
+  remote: https://github.com/cbldev/langchainrb.git
   revision: 656ca14c6294bcb1e06e4e691bd0132781d22d67
   branch: main
   specs:
@@ -13,7 +13,7 @@ GIT
       zeitwerk (~> 2.5)
 
 GIT
-  remote: https://github.com/patterns-ai-core/langchainrb_rails.git
+  remote: https://github.com/cbldev/langchainrb_rails.git
   revision: 6068933d58de9db03d0b07b003f3aaae5d14cea6
   branch: main
   specs:
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 8000217130cf9c70b0736fbff2ccb26c8fb162df
+  revision: f5355a21ae536a6638d503389a549e00c45cfa29
   branch: main
   specs:
     actioncable (8.0.0.alpha)
@@ -171,7 +171,7 @@ GEM
     dotenv (2.8.1)
     drb (2.2.1)
     ed25519 (1.3.0)
-    erubi (1.12.0)
+    erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
     faraday (2.9.1)
@@ -246,20 +246,20 @@ GEM
       net-protocol
     net-ssh (7.2.3)
     nio4r (2.7.3)
-    nokogiri (1.16.5-aarch64-linux)
+    nokogiri (1.16.6-aarch64-linux)
       racc (~> 1.4)
-    nokogiri (1.16.5-arm-linux)
+    nokogiri (1.16.6-arm-linux)
       racc (~> 1.4)
-    nokogiri (1.16.5-arm64-darwin)
+    nokogiri (1.16.6-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.5-x86-linux)
+    nokogiri (1.16.6-x86-linux)
       racc (~> 1.4)
-    nokogiri (1.16.5-x86_64-darwin)
+    nokogiri (1.16.6-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.5-x86_64-linux)
+    nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
     parallel (1.25.1)
-    parser (3.3.2.0)
+    parser (3.3.3.0)
       ast (~> 2.4.1)
       racc
     pdf-reader (2.12.0)
@@ -284,7 +284,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.0)
-    rack (3.1.2)
+    rack (3.1.3)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -309,7 +309,7 @@ GEM
     redis-client (0.22.2)
       connection_pool
     regexp_parser (2.9.2)
-    reline (0.5.8)
+    reline (0.5.9)
       io-console (~> 0.5)
     rexml (3.3.0)
       strscan
@@ -365,7 +365,7 @@ GEM
       net-ssh (>= 2.8.0)
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
-    stringio (3.1.0)
+    stringio (3.1.1)
     strscan (3.1.0)
     tailwindcss-rails (2.6.1)
       railties (>= 7.0.0)
