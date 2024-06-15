@@ -19,7 +19,7 @@ else
   echo "OLLAMA_URL is not set, using default value"
   OLLAMA_URL=http://localhost:11434
 fi
-OLLAMA_MODEL=mistral
+OLLAMA_MODEL=phi3:medium
 POSTGRES_HOST=postgres-db
 POSTGRES_PORT=5432
 POSTGRES_DB=nosia_production

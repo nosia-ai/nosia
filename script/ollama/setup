@@ -5,5 +5,10 @@ if command -v ollama &> /dev/null; then
   exit 0
 fi
 
+if [ -z "$OLLAMA_URL" ]; then
+  echo "OLLAMA_URL is already set"
+  exit 0
+fi
+
 curl -fsSL https://ollama.com/install.sh | sh
-ollama pull mistral
+ollama run phi3:medium

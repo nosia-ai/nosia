@@ -35,8 +35,8 @@ Replace `<HOST_IP>` with the IP address of the host machine and run the followin
 
 ```bash
 brew install ollama
-ollama pull mistral
-OLLAMA_URL=<HOST_IP>:11434 ollama run mistral
+ollama pull phi3:medium
+OLLAMA_URL=<HOST_IP>:11434 ollama run phi3:medium
 ```
 
 On the Debian/Ubuntu VM:
