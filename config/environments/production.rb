@@ -40,11 +40,11 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  # config.assume_ssl = true
+  config.assume_ssl = ENV.fetch("RAILS_ASSUME_SSL", "false")
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
-  
+  config.force_ssl = ENV.fetch("RAILS_FORCE_SSL", "false")
+
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
@@ -65,7 +65,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter = :resque
+  # config.active_job.queue_adapter = :solid_queue
   # config.active_job.queue_name_prefix = "nosia_production"
 
   config.action_mailer.perform_caching = false

@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+# Nosia dependency
+gem "dotenv", groups: [:development, :test]
+
 # Use main development branch of Rails
 gem "rails", github: "rails/rails", branch: "main"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
@@ -53,6 +56,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Nosia dependencies
+  gem "dockerfile-rails"
 end
 
 group :test do
@@ -60,3 +66,16 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Nosia dependencies
+gem "faraday"
+gem "langchainrb", github: "cbldev/langchainrb", branch: "main"
+gem "langchainrb_rails", github: "cbldev/langchainrb_rails", branch: "main"
+gem "mission_control-jobs", github: "rails/mission_control-jobs", branch: "main"
+gem "neighbor"
+gem "pdf-reader"
+gem "pgvector", "~> 0.2"
+gem "sequel", "~> 5.68.0"
+gem "solid_queue"
+gem "thruster"
+gem "tiktoken_ruby"

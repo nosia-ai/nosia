@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+source ./script/concerns/loader
+
+start_loader "Starting Ollama"
+sudo systemctl start ollama.service &>> ./log/production.log
+stop_loader
+
+start_loader "Starting Nosia"
+source .env
+trap exit_loader EXIT
+docker compose up -d &>> ./log/production.log
+stop_loader

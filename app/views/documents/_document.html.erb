@@ -1,0 +1,9 @@
+<div id="<%= dom_id document %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Title:</strong>
+    <%= document.title %>
+  </p>
+  <p class="my-5">
+    <%= document.content&.first(100) %>
+  </p>
+</div>
