@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+pre {
+  @apply my-2 p-4 rounded-xl;
+}

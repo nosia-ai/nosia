@@ -25,4 +25,8 @@ class Message < ApplicationRecord
       target: "#{dom_id(chat)}_messages"
     )
   end
+
+  def to_html
+    Commonmarker.to_html(content)
+  end
 end
