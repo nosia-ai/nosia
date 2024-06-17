@@ -2,13 +2,17 @@
   <% if message.user? %>
     <div class="flex flex-row px-2 py-4 sm:px-4">
       <div class="flex max-w-3xl items-center">
-        <%= message.content %>
+        <div>
+          <%= sanitize message.content, attributes: %w(style) %>
+        </div>
       </div>
     </div>
   <% else %>
     <div class="mb-4 flex rounded-xl bg-slate-50 px-2 py-6 dark:bg-slate-900 sm:px-4">
       <div class="flex max-w-3xl items-center rounded-xl">
-        <%= message.content %>
+        <div>
+          <%= sanitize message.to_html, attributes: %w(style) %>
+        </div>
       </div>
     </div>
   <% end %>
