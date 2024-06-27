@@ -19,7 +19,12 @@ else
   echo "OLLAMA_URL is not set, using default value"
   OLLAMA_URL=http://localhost:11434
 fi
-OLLAMA_MODEL=phi3:medium
+if [ -n "$OLLAMA_MODEL" ]; then
+  echo "Using OLLAMA_MODEL from environment"
+else
+  echo "OLLAMA_MODEL is not set, using default value"
+  OLLAMA_MODEL=phi3:medium
+fi
 POSTGRES_HOST=postgres-db
 POSTGRES_PORT=5432
 POSTGRES_DB=nosia_production
