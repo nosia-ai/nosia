@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_06_10_190554) do
+ActiveRecord::Schema[8.0].define(version: 2024_06_28_210314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -48,6 +48,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_190554) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chunks", force: :cascade do |t|
+    t.bigint "document_id", null: false
+    t.text "content"
+    t.vector "embedding", limit: 768
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_chunks_on_document_id"
+  end
+
   create_table "documents", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -63,6 +72,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_190554) do
     t.integer "response_number", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "similar_document_ids", default: [], array: true
     t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
@@ -171,6 +181,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_190554) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chunks", "documents"
   add_foreign_key "messages", "chats"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

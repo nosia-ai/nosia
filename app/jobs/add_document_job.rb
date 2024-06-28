@@ -5,6 +5,6 @@ class AddDocumentJob < ApplicationJob
     document = Document.find(document_id)
     document.titlize!
     document.parse!
-    document.vectorize! if document.content.present?
+    document.chunkify! if document.content.present?
   end
 end
