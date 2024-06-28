@@ -13,18 +13,35 @@ else
   echo "RAILS_MASTER_KEY is not set, exiting"
   exit 1
 fi
+
 if [ -n "$OLLAMA_URL" ]; then
   echo "Using OLLAMA_URL from environment"
 else
   echo "OLLAMA_URL is not set, using default value"
   OLLAMA_URL=http://localhost:11434
 fi
-if [ -n "$OLLAMA_MODEL" ]; then
-  echo "Using OLLAMA_MODEL from environment"
+
+if [ -n "$OLLAMA_CHAT_COMPLETION_MODEL" ]; then
+  echo "Using OLLAMA_CHAT_COMPLETION_MODEL from environment"
 else
-  echo "OLLAMA_MODEL is not set, using default value"
-  OLLAMA_MODEL=phi3:medium
+  echo "OLLAMA_CHAT_COMPLETION_MODEL is not set, using default value"
+  OLLAMA_CHAT_COMPLETION_MODEL=phi3:medium
 fi
+
+if [ -n "$OLLAMA_COMPLETION_MODEL" ]; then
+  echo "Using OLLAMA_COMPLETION_MODEL from environment"
+else
+  echo "OLLAMA_COMPLETION_MODEL is not set, using default value"
+  OLLAMA_COMPLETION_MODEL=phi3:medium
+fi
+
+if [ -n "$OLLAMA_EMBEDDINGS_MODEL" ]; then
+  echo "Using OLLAMA_EMBEDDINGS_MODEL from environment"
+else
+  echo "OLLAMA_EMBEDDINGS_MODEL is not set, using default value"
+  OLLAMA_EMBEDDINGS_MODEL=nomic-embed-text
+fi
+
 POSTGRES_HOST=postgres-db
 POSTGRES_PORT=5432
 POSTGRES_DB=nosia_production
@@ -34,7 +51,9 @@ DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POST
 
 echo "DATABASE_URL=$DATABASE_URL" > .env
 echo "OLLAMA_URL=$OLLAMA_URL" >> .env
-echo "OLLAMA_MODEL=$OLLAMA_MODEL" >> .env
+echo "OLLAMA_CHAT_COMPLETION_MODEL=$OLLAMA_CHAT_COMPLETION_MODEL" >> .env
+echo "OLLAMA_COMPLETION_MODEL=$OLLAMA_COMPLETION_MODEL" >> .env
+echo "OLLAMA_EMBEDDINGS_MODEL=$OLLAMA_EMBEDDINGS_MODEL" >> .env
 echo "POSTGRES_HOST=$POSTGRES_HOST" >> .env
 echo "POSTGRES_PORT=$POSTGRES_PORT" >> .env
 echo "POSTGRES_DB=$POSTGRES_DB" >> .env

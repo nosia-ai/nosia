@@ -36,7 +36,8 @@ Replace `<HOST_IP>` with the IP address of the host machine and run the followin
 ```bash
 brew install ollama
 ollama pull phi3:medium
-OLLAMA_URL=<HOST_IP>:11434 ollama run phi3:medium
+ollama pull nomic-embed-text
+OLLAMA_URL=<HOST_IP>:11434 OLLAMA_NUM_PARALLEL=3 OLLAMA_MAX_LOADED_MODELS=2 ollama serve
 ```
 
 On the Debian/Ubuntu VM:

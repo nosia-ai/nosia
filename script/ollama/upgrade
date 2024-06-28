@@ -2,3 +2,4 @@
 
 curl -fsSL https://ollama.com/install.sh | sh
 ollama pull phi3:medium
+ollama pull nomic-embed-text
