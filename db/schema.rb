@@ -51,7 +51,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_190554) do
   create_table "documents", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.vector "embedding", limit: 4096
+    t.vector "embedding", limit: 768
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
