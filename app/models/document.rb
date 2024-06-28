@@ -1,5 +1,5 @@
 class Document < ApplicationRecord
-  include Parsable, Vectorizable
+  include Chunkable, Parsable, Vectorizable
 
   has_one_attached :file
 

@@ -435,6 +435,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  baran
   bootsnap
   brakeman
   capybara

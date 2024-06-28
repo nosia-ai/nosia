@@ -68,6 +68,7 @@ group :test do
 end
 
 # Nosia dependencies
+gem "baran"
 gem "commonmarker"
 gem "faraday"
 gem "langchainrb", github: "cbldev/langchainrb", branch: "main"

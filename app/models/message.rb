@@ -26,6 +26,10 @@ class Message < ApplicationRecord
     )
   end
 
+  def similar_documents
+    Document.where(id: similar_document_ids)
+  end
+
   def to_html
     Commonmarker.to_html(content)
   end
