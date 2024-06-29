@@ -23,7 +23,7 @@ You should see the following output:
 ✅ Starting Nosia
 ```
 
-You can now access Nosia at `http://localhost:3000`
+You can now access Nosia at `https://nosia.localhost`
 
 ## macOS installation with Debian/Ubuntu VM
 
@@ -62,7 +62,17 @@ You should see the following output:
 ✅ Starting Nosia
 ```
 
-Replace `<VM_IP>` with the IP address of the VM and you can now access Nosia at `http://<VM_IP>:3000`
+From the VM, you can access Nosia at `https://nosia.localhost`
+
+If you want to access Nosia from the host machine, you may need to forward the port from the VM to the host machine.
+
+Replace `<USER>` with the username of the VM, `<VM_IP>` with the IP address of the VM, and `<LOCAL_PORT>` with the port you want to use on the host machine, 8443 for example, and run the following command:
+
+```bash
+ssh -f <USER>@<VM_IP> -L <LOCAL_PORT>:localhost:443
+```
+
+After running the command, you can access Nosia at `https://nosia.localhost:<LOCAL_PORT>`.
 
 ## Installation with custom models
 

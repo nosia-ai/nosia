@@ -1,0 +1,3 @@
+{$NOSIA_URL:nosia.localhost} {
+  reverse_proxy web:3000
+}
