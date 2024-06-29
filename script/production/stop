@@ -2,9 +2,9 @@
 
 source ./script/concerns/loader
 
-start_loader "Stopping Ollama"
-sudo systemctl stop ollama.service &>> ./log/production.log
-stop_loader
+if [ "$OLLAMA_URL" == "http://localhost:11434" ]; then
+  ./script/ollama/stop
+fi
 
 start_loader "Stopping Nosia"
 docker compose down &>> ./log/production.log
