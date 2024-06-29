@@ -3,6 +3,8 @@
 Nosia is a platform that allows you to run an AI model on your own data.
 It is designed to be easy to install and use.
 
+https://github.com/nosia-ai/nosia/assets/1692273/ce60094b-abb5-4ed4-93aa-f69485e058b0
+
 ## Debian/Ubuntu one command installation
 
 It will install Docker, Ollama, and Nosia on a Debian/Ubuntu machine.
