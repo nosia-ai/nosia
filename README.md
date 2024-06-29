@@ -5,6 +5,8 @@ It is designed to be easy to install and use.
 
 ## Debian/Ubuntu one command installation
 
+It will install Docker, Ollama, and Nosia on a Debian/Ubuntu machine.
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | sh
 ```
@@ -42,7 +44,7 @@ OLLAMA_URL=<HOST_IP>:11434 OLLAMA_NUM_PARALLEL=3 OLLAMA_MAX_LOADED_MODELS=2 olla
 
 On the Debian/Ubuntu VM:
 
-Replace `<HOST_IP>` with the IP address of the host machine and `<KEY>` with the Rails master key and run the following command:
+Replace `<HOST_IP>` with the IP address of the host machine and run the following command:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_URL=<HOST_IP>:11434 sh
@@ -60,7 +62,11 @@ You should see the following output:
 
 Replace `<VM_IP>` with the IP address of the VM and you can now access Nosia at `http://<VM_IP>:3000`
 
-## Installation with custom completion models
+## Installation with custom models
+
+### Custom completion model
+
+By default, Nosia uses the `phi3:medium` completion model and the `nomic-embed-text` embeddings model.
 
 You can use any completion model available on Ollama by setting the `OLLAMA_CHAT_COMPLETION_MODEL` and `OLLAMA_COMPLETION_MODEL` environment variables during the installation.
 
@@ -69,6 +75,10 @@ For example, to use the `llama3:latest` model, replace `<HOST_IP>` with the IP a
 ```bash
 curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_URL=<HOST_IP>:11434 OLLAMA_CHAT_COMPLETION_MODEL=llama3:latest OLLAMA_COMPLETION_MODEL=llama3:latest sh
 ```
+
+### Custom embeddings model
+
+At this time, the `nomic-embed-text` embeddings model is required for Nosia to work.
 
 ## Starting, upgrading, and stopping the services
 
@@ -89,4 +99,4 @@ If you encounter any issue:
 - with Nosia, you can check the logs with `docker compose -f ./docker-compose.yml logs -f`
 - with the Ollama server, you can check the logs at `~/.ollama/logs/server.log`
 
-If you need further assistance, please contact us!
+If you need further assistance, please open an issue!
