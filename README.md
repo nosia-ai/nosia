@@ -6,7 +6,7 @@ It is designed to be easy to install and use.
 ## Debian/Ubuntu one command installation
 
 ```bash
-curl -fsSL https://gitd.fr/-/snippets/1/raw/main/ia.sh | RAILS_MASTER_KEY=<KEY> sh
+curl -fsSL https://gitd.fr/-/snippets/1/raw/main/ia.sh | sh
 ```
 
 You should see the following output:
@@ -45,7 +45,7 @@ On the Debian/Ubuntu VM:
 Replace `<HOST_IP>` with the IP address of the host machine and `<KEY>` with the Rails master key and run the following command:
 
 ```bash
-curl -fsSL https://gitd.fr/-/snippets/1/raw/main/ia.sh | OLLAMA_URL=<HOST_IP>:11434 RAILS_MASTER_KEY=<KEY> sh
+curl -fsSL https://gitd.fr/-/snippets/1/raw/main/ia.sh | OLLAMA_URL=<HOST_IP>:11434 sh
 ```
 
 You should see the following output:

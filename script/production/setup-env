@@ -7,13 +7,6 @@ fi
 
 echo "Generating .env file"
 
-if [ -n "$RAILS_MASTER_KEY" ]; then
-  echo "Using RAILS_MASTER_KEY from environment"
-else
-  echo "RAILS_MASTER_KEY is not set, exiting"
-  exit 1
-fi
-
 if [ -n "$OLLAMA_URL" ]; then
   echo "Using OLLAMA_URL from environment"
 else
@@ -48,6 +41,7 @@ POSTGRES_DB=nosia_production
 POSTGRES_USER=nosia
 POSTGRES_PASSWORD=$(openssl rand -base64 32)
 DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
+SECRET_KEY_BASE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 63 ; echo '')
 
 echo "DATABASE_URL=$DATABASE_URL" > .env
 echo "OLLAMA_URL=$OLLAMA_URL" >> .env
@@ -59,6 +53,6 @@ echo "POSTGRES_PORT=$POSTGRES_PORT" >> .env
 echo "POSTGRES_DB=$POSTGRES_DB" >> .env
 echo "POSTGRES_USER=$POSTGRES_USER" >> .env
 echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
-echo "RAILS_MASTER_KEY=$RAILS_MASTER_KEY" >> .env
+echo "SECRET_KEY_BASE=$SECRET_KEY_BASE" >> .env
 
 echo ".env file generated"
