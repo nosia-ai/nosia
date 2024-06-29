@@ -1,5 +1,10 @@
 #!/bin/bash -e
 
+if [ "$OLLAMA_URL" != "http://localhost:11434" ]; then
+  echo "OLLAMA_URL is not localhost"
+  exit 0
+fi
+
 curl -fsSL https://ollama.com/install.sh | sh
 ollama pull phi3:medium
 ollama pull nomic-embed-text
