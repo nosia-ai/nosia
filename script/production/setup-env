@@ -46,7 +46,7 @@ POSTGRES_HOST=postgres-db
 POSTGRES_PORT=5432
 POSTGRES_DB=nosia_production
 POSTGRES_USER=nosia
-POSTGRES_PASSWORD=$(openssl rand -base64 32)
+POSTGRES_PASSWORD=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo '')
 DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
 SECRET_KEY_BASE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 63 ; echo '')
 
