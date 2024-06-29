@@ -2,9 +2,9 @@
 
 source ./script/concerns/loader
 
-start_loader "Starting Ollama"
-sudo systemctl start ollama.service &>> ./log/production.log
-stop_loader
+if [ "$OLLAMA_URL" == "http://localhost:11434" ]; then
+  ./script/ollama/start
+fi
 
 start_loader "Starting Nosia"
 source .env
