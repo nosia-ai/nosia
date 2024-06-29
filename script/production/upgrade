@@ -12,7 +12,7 @@ start_loader "Upgrading Nosia"
 trap exit_loader EXIT
 newgrp docker <<EONG
 docker compose down &>> ./log/production.log
-docker compose --env-file .env build &>> ./log/production.log
-docker compose --env-file .env up -d &>> ./log/production.log
+docker compose build &>> ./log/production.log
+docker compose --env-file .env up -d --force-recreate &>> ./log/production.log
 EONG
 stop_loader

@@ -1,12 +1,25 @@
 services:
+  reverse-proxy:
+    image: caddy:latest
+    depends_on:
+      - web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - NOSIA_URL=${NOSIA_URL}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy-config:/config
+      - caddy-data:/data
+
   web:
     build:
       context: .
       args:
         UID: ${UID:-1000}
         GID: ${GID:-${UID:-1000}}
-    ports:
-      - "3000:3000"
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - OLLAMA_URL=${OLLAMA_URL}
@@ -14,6 +27,8 @@ services:
       - OLLAMA_COMPLETION_MODEL=${OLLAMA_COMPLETION_MODEL}
       - OLLAMA_EMBEDDINGS_MODEL=${OLLAMA_EMBEDDINGS_MODEL}
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+    volumes:
+      - rails-storage:/rails/storage
     depends_on:
       postgres-db:
         condition: service_healthy
@@ -21,14 +36,15 @@ services:
   postgres-db:
     image: pgvector/pgvector:pg16
     environment:
+      - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - postgres-db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
-      test: pg_isready
+      test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
       interval: 2s
       timeout: 5s
       retries: 30
@@ -43,6 +59,14 @@ services:
       - OLLAMA_COMPLETION_MODEL=${OLLAMA_COMPLETION_MODEL}
       - OLLAMA_EMBEDDINGS_MODEL=${OLLAMA_EMBEDDINGS_MODEL}
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+    volumes:
+      - rails-storage:/rails/storage
     depends_on:
       postgres-db:
         condition: service_healthy
+
+volumes:
+  caddy-config:
+  caddy-data:
+  postgres-db-data:
+  rails-storage:

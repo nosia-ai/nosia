@@ -7,6 +7,13 @@ fi
 
 echo "Generating .env file"
 
+if [ -n "$NOSIA_URL" ]; then
+  echo "Using NOSIA_URL from environment"
+else
+  echo "NOSIA_URL is not set, using default value"
+  NOSIA_URL=https://nosia.localhost
+fi
+
 if [ -n "$OLLAMA_URL" ]; then
   echo "Using OLLAMA_URL from environment"
 else
@@ -44,6 +51,7 @@ DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POST
 SECRET_KEY_BASE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 63 ; echo '')
 
 echo "DATABASE_URL=$DATABASE_URL" > .env
+echo "NOSIA_URL=$NOSIA_URL" >> .env
 echo "OLLAMA_URL=$OLLAMA_URL" >> .env
 echo "OLLAMA_CHAT_COMPLETION_MODEL=$OLLAMA_CHAT_COMPLETION_MODEL" >> .env
 echo "OLLAMA_COMPLETION_MODEL=$OLLAMA_COMPLETION_MODEL" >> .env

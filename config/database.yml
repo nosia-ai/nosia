@@ -85,6 +85,4 @@ test:
 #
 production:
   <<: *default
-  database: nosia_production
-  username: nosia
-  password: <%= ENV["NOSIA_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
