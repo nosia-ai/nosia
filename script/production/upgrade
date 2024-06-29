@@ -2,8 +2,10 @@
 
 source ./script/concerns/loader
 
-start_loader "Upgrading Ollama"
 ./script/ollama/upgrade &>> ./log/production.log
+
+start_loader "Pulling latest changes of Nosia"
+git pull &>> ./log/production.log
 stop_loader
 
 start_loader "Upgrading Nosia"
