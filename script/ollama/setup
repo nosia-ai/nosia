@@ -1,12 +1,12 @@
 #!/bin/bash -e
 
-if command -v ollama &> /dev/null; then
-  echo "ollama is already installed"
+if [ "$OLLAMA_URL" != "http://localhost:11434" ]; then
+  echo "OLLAMA_URL is not localhost"
   exit 0
 fi
 
-if [ -z "$OLLAMA_URL" ]; then
-  echo "OLLAMA_URL is already set"
+if command -v ollama &> /dev/null; then
+  echo "ollama is already installed"
   exit 0
 fi
 
