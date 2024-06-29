@@ -8,10 +8,12 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
       - DATABASE_URL=$DATABASE_URL
       - OLLAMA_URL=$OLLAMA_URL
-      - OLLAMA_MODEL=$OLLAMA_MODEL
+      - OLLAMA_CHAT_COMPLETION_MODEL=$OLLAMA_CHAT_COMPLETION_MODEL
+      - OLLAMA_COMPLETION_MODEL=$OLLAMA_COMPLETION_MODEL
+      - OLLAMA_EMBEDDINGS_MODEL=$OLLAMA_EMBEDDINGS_MODEL
+      - SECRET_KEY_BASE=$SECRET_KEY_BASE
     depends_on:
       postgres-db:
         condition: service_healthy
@@ -35,10 +37,12 @@ services:
     build: .
     command: bundle exec rake solid_queue:start
     environment:
-      - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
       - DATABASE_URL=$DATABASE_URL
       - OLLAMA_URL=$OLLAMA_URL
-      - OLLAMA_MODEL=$OLLAMA_MODEL
+      - OLLAMA_CHAT_COMPLETION_MODEL=$OLLAMA_CHAT_COMPLETION_MODEL
+      - OLLAMA_COMPLETION_MODEL=$OLLAMA_COMPLETION_MODEL
+      - OLLAMA_EMBEDDINGS_MODEL=$OLLAMA_EMBEDDINGS_MODEL
+      - SECRET_KEY_BASE=$SECRET_KEY_BASE
     depends_on:
       postgres-db:
         condition: service_healthy
