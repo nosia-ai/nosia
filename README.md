@@ -19,7 +19,7 @@ You should see the following output:
 ✅ Starting Nosia
 ```
 
-Replace `<VM_IP>` with the IP address of the VM and you can now access Nosia at `http://<VM_IP>:3000`
+You can now access Nosia at `http://localhost:3000`
 
 ## macOS installation with Debian/Ubuntu VM
 
@@ -60,22 +60,33 @@ You should see the following output:
 
 Replace `<VM_IP>` with the IP address of the VM and you can now access Nosia at `http://<VM_IP>:3000`
 
-## Starting, upgrading, and stopping the services
+## Installation with custom completion models
 
-You can start and stop the services with the following commands:
+You can use any completion model available on Ollama by setting the `OLLAMA_CHAT_COMPLETION_MODEL` and `OLLAMA_COMPLETION_MODEL` environment variables during the installation.
+
+For example, to use the `llama3:latest` model, replace `<HOST_IP>` with the IP address of the host machine and run the following command:
 
 ```bash
-./ia/script/production/start
-./ia/script/production/upgrade
-./ia/script/production/stop
+curl -fsSL https://gitd.fr/-/snippets/1/raw/main/ia.sh | OLLAMA_URL=<HOST_IP>:11434 OLLAMA_CHAT_COMPLETION_MODEL=llama3:latest OLLAMA_COMPLETION_MODEL=llama3:latest sh
+```
+
+## Starting, upgrading, and stopping the services
+
+You can start, upgrade and stop the services with the following commands:
+
+```bash
+cd nosia
+./script/production/start
+./script/production/upgrade
+./script/production/stop
 ```
 
 ## Troubleshooting
 
 If you encounter any issue:
-- during the installation, you can check the logs at `./ia/log/production.log`
-- during the use waiting for an AI response, you can check the jobs at `http://<VM_IP>:3000/jobs`
-- with Nosia, you can check the logs with `docker compose -f ./ia/docker-compose.yml logs -f`
+- during the installation, you can check the logs at `./log/production.log`
+- during the use waiting for an AI response, you can check the jobs at `http://<IP>:3000/jobs`
+- with Nosia, you can check the logs with `docker compose -f ./docker-compose.yml logs -f`
 - with the Ollama server, you can check the logs at `~/.ollama/logs/server.log`
 
 If you need further assistance, please contact us!
