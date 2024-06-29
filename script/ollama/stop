@@ -5,7 +5,7 @@ if [ "$OLLAMA_URL" != "http://localhost:11434" ]; then
   exit 0
 fi
 
-source ./script/concerns/loader
+. ./script/concerns/loader
 
 start_loader "Starting Ollama"
 sudo systemctl stop ollama.service &>> ./log/production.log

@@ -1,11 +1,13 @@
 #!/bin/bash -e
 
-source ./script/concerns/loader
+. ./script/concerns/loader
 
 if [ "$OLLAMA_URL" == "http://localhost:11434" ]; then
   ./script/ollama/stop
 fi
 
 start_loader "Stopping Nosia"
+newgrp docker <<EONG
 docker compose down &>> ./log/production.log
+EONG
 stop_loader
