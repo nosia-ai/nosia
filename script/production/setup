@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-source ./script/concerns/loader
+. ./script/concerns/loader
 
 start_loader "Setting up environment"
 OLLAMA_CHAT_COMPLETION_MODEL=$OLLAMA_CHAT_COMPLETION_MODEL OLLAMA_COMPLETION_MODEL=$OLLAMA_COMPLETION_MODEL OLLAMA_URL=$OLLAMA_URL ./script/production/setup-env &>> ./log/production.log
