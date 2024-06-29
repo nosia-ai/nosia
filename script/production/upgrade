@@ -5,3 +5,11 @@ source ./script/concerns/loader
 start_loader "Upgrading Ollama"
 ./script/ollama/upgrade &>> ./log/production.log
 stop_loader
+
+start_loader "Upgrading Nosia"
+source .env
+trap exit_loader EXIT
+docker compose down &>> ./log/production.log
+docker compose build &>> ./log/production.log
+docker compose up -d &>> ./log/production.log
+stop_loader
