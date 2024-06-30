@@ -29,9 +29,15 @@ services:
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
     volumes:
       - rails-storage:/rails/storage
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/up"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
     depends_on:
       postgres-db:
         condition: service_healthy
+    restart: on-failure:5
 
   postgres-db:
     image: pgvector/pgvector:pg16
@@ -48,6 +54,7 @@ services:
       interval: 2s
       timeout: 5s
       retries: 30
+    restart: on-failure:5
 
   solidq:
     build: .
@@ -64,6 +71,9 @@ services:
     depends_on:
       postgres-db:
         condition: service_healthy
+      web:
+        condition: service_healthy
+    restart: on-failure:5
 
 volumes:
   caddy-config:
