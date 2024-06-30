@@ -55,7 +55,7 @@ On the Debian/Ubuntu VM:
 Replace `<HOST_IP>` with the IP address of the host machine and run the following command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_URL=<HOST_IP>:11434 sh
+curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_URL=http://<HOST_IP>:11434 sh
 ```
 
 You should see the following output:
@@ -91,7 +91,7 @@ You can use any completion model available on Ollama by setting the `OLLAMA_CHAT
 For example, to use the `llama3:latest` model, replace `<HOST_IP>` with the IP address of the host machine and run the following command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_URL=<HOST_IP>:11434 OLLAMA_CHAT_COMPLETION_MODEL=llama3:latest OLLAMA_COMPLETION_MODEL=llama3:latest sh
+curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_URL=http://<HOST_IP>:11434 OLLAMA_CHAT_COMPLETION_MODEL=llama3:latest OLLAMA_COMPLETION_MODEL=llama3:latest sh
 ```
 
 ### Custom embeddings model
