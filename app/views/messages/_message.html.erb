@@ -10,7 +10,7 @@
   <% else %>
     <% if message.similar_document_ids.any? %>
       <div class="px-2 py-4 sm:px-4">
-        <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-200">Documents similaires</h2>
+        <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-200">Similar documents</h2>
         <ul role="list" class="grid grid-cols-1 gap-6 text-slate-900 dark:text-slate-200 sm:grid-cols-2 lg:grid-cols-3">
           <% message.similar_documents.each do |document| %>
             <li class="group col-span-1 rounded-lg bg-slate-50 shadow transition-colors duration-300 hover:bg-blue-600 dark:bg-slate-900 dark:hover:bg-blue-600">
