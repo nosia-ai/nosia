@@ -1,5 +1,5 @@
 class ChatsController < ApplicationController
-  before_action :set_chat, only: %i[show]
+  before_action :set_chat, only: %i[show destroy]
 
   def show
   end
@@ -7,6 +7,11 @@ class ChatsController < ApplicationController
   def create
     @chat = Chat.create
     redirect_to @chat
+  end
+
+  def destroy
+    @chat.destroy
+    redirect_to root_path
   end
 
   private
