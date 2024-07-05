@@ -1,0 +1,32 @@
+#!/bin/bash -e
+
+. ./script/concerns/loader
+
+start_loader "Setting up prerequisites"
+
+# Install openssl if not already installed
+if ! command -v openssl &> /dev/null; then
+  sudo apt-get install -y openssl
+fi
+
+stop_loader
+
+start_loader "Setting up ollama"
+curl -fsSL https://ollama.com/install.sh | sh
+stop_loader
+
+start_loader "Pulling models. This may take a while..."
+ollama pull mistral:7b
+ollama pull nomic-embed-text
+stop_loader
+
+start_loader "Setting up Docker"
+./script/concerns/linux/setup-docker &>> ./log/production.log
+stop_loader
+
+start_loader "Setting up Nosia"
+# Set environment variables for Nosia
+./script/concerns/setup-env
+# Build Nosia
+docker compose --env-file .env build
+stop_loader

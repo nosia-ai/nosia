@@ -1,0 +1,56 @@
+#!/bin/bash
+
+. ./script/concerns/loader
+
+start_loader "Setting up prerequisites"
+
+# Install brew if not installed
+if ! command -v brew &> /dev/null
+then
+  echo "brew not found, installing..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Install openssl if not installed
+if ! brew list openssl &> /dev/null
+then
+  echo "openssl not found, installing..."
+  brew install openssl
+fi
+
+stop_loader
+
+start_loader "Setting up ollama"
+# Install ollama if not installed
+if ! brew list ollama &> /dev/null
+then
+  echo "ollama not found, installing..."
+  brew install ollama
+fi
+stop_loader
+
+start_loader "Pulling models. This may take a while..."
+# Pull Mistral and Nomic Embed Text models from registry
+ollama pull mistral:7b
+ollama pull nomic-embed-text
+stop_loader
+
+start_loader "Setting up podman"
+# Install podman if not installed
+if ! brew list podman &> /dev/null
+then
+  echo "podman not found, installing..."
+  brew install podman podman-compose
+  # Initialize podman machine
+  podman machine init
+  # Set podman to rootful mode
+  podman machine set --rootful
+fi
+stop_loader
+
+start_loader "Setting up Nosia"
+# Set environment variables for Nosia
+OLLAMA_URL=http://host.containers.internal:11434 ./script/concerns/setup-env
+# Build Nosia
+podman-compose --env-file .env build
+stop_loader

@@ -1,0 +1,21 @@
+#!/bin/bash -e
+
+. ./script/concerns/loader
+
+start_loader "Upgrading Nosia"
+# Pull latest changes
+git pull
+# Build Nosia
+docker compose --env-file .env build
+stop_loader
+
+start_loader "Upgrading ollama"
+curl -fsSL https://ollama.com/install.sh | sh
+stop_loader
+
+start_loader "Pulling models. This may take a while..."
+# Pull Mistral and Nomic Embed Text models from registry
+ollama pull mistral:7b
+ollama pull nomic-embed-text
+stop_loader
+
