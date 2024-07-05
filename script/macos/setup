@@ -7,14 +7,12 @@ start_loader "Setting up prerequisites"
 # Install brew if not installed
 if ! command -v brew &> /dev/null
 then
-  echo "brew not found, installing..."
   curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | sh &> ./log/setup.log
 fi
 
 # Install openssl if not installed
 if ! brew list openssl &> /dev/null
 then
-  echo "openssl not found, installing..."
   brew install openssl &> ./log/setup.log
 fi
 
@@ -24,7 +22,6 @@ start_loader "Setting up ollama"
 # Install ollama if not installed
 if ! brew list ollama &> /dev/null
 then
-  echo "ollama not found, installing..."
   brew install ollama &> ./log/setup.log
 fi
 stop_loader
@@ -42,7 +39,6 @@ start_loader "Setting up podman"
 # Install podman if not installed
 if ! brew list podman &> /dev/null
 then
-  echo "podman not found, installing..."
   brew install podman podman-compose &> ./log/setup.log
 fi
 stop_loader
