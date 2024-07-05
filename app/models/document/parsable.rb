@@ -3,8 +3,8 @@ module Document::Parsable
 
   def parse
     self.file.blob.open do |io|
-      reader = ::PDF::Reader.new(io)
-      self.content = reader.pages.map(&:text).join("\n\n")
+      system("pdftotext", io.path, io.path + ".txt")
+      self.content = File.read(io.path + ".txt")
     end
   end
 
