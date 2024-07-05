@@ -4,18 +4,17 @@
 
 start_loader "Upgrading Nosia"
 # Pull latest changes
-git pull
+git pull &>> ./log/nosia.log
 # Build Nosia
-docker compose --env-file .env build
+docker compose --env-file .env build &>> ./log/docker.log
 stop_loader
 
 start_loader "Upgrading ollama"
-curl -fsSL https://ollama.com/install.sh | sh
+curl -fsSL https://ollama.com/install.sh | sh &>> ./log/ollama.log
 stop_loader
 
 start_loader "Pulling models. This may take a while..."
 # Pull Mistral and Nomic Embed Text models from registry
-ollama pull mistral:7b
-ollama pull nomic-embed-text
+ollama pull mistral:7b &>> ./log/ollama.log
+ollama pull nomic-embed-text &>> ./log/ollama.log
 stop_loader
-
