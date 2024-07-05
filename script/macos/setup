@@ -8,7 +8,7 @@ start_loader "Setting up prerequisites"
 if ! command -v brew &> /dev/null
 then
   echo "brew not found, installing..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &>> ./log/setup.log
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | sh &>> ./log/setup.log
 fi
 
 # Install openssl if not installed
