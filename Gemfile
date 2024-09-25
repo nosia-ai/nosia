@@ -58,6 +58,7 @@ group :development do
   gem "web-console"
 
   # Nosia dependencies
+  gem "bundler-audit"
   gem "dockerfile-rails"
 end
 
