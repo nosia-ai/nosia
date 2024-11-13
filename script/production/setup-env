@@ -59,6 +59,7 @@ SECRET_KEY_BASE=$(
 echo "DATABASE_URL=$DATABASE_URL" >.env
 echo "NOSIA_URL=$NOSIA_URL" >>.env
 echo "OLLAMA_BASE_URL=$OLLAMA_BASE_URL" >>.env
+echo "OLLAMA_API_KEY=" >> .env
 echo "LLM_MODEL=$LLM_MODEL" >>.env
 echo "CHECK_MODEL=$CHECK_MODEL" >>.env
 echo "EMBEDDING_MODEL=$EMBEDDING_MODEL" >>.env
