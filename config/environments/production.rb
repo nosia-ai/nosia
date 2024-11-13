@@ -104,6 +104,6 @@ Rails.application.configure do
     enable_starttls: true
   }
 
-  config.action_mailer.default_url_options = {host: Rails.application.credentials.dig(:host)}
-  routes.default_url_options[:host] ||= Rails.application.credentials.dig(:host)
+  config.action_mailer.default_url_options = { host: ENV.fetch("NOSIA_URL", "https://nosia.localhost") }
+  routes.default_url_options[:host] ||= ENV.fetch("NOSIA_URL", "https://nosia.localhost")
 end
