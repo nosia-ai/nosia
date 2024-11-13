@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 
 # Nosia dependency
-gem "dotenv", groups: [:development, :test]
+gem "dotenv", groups: [ :development, :test ]
 
 # Use main development branch of Rails
-gem "rails", github: "rails/rails", branch: "main"
+gem "rails", "~> 8.0.0"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use postgresql as the database for Active Record
@@ -58,7 +58,9 @@ group :development do
   gem "web-console"
 
   # Nosia dependencies
+  gem "bundler-audit"
   gem "dockerfile-rails"
+  gem "mailbin"
 end
 
 group :test do
@@ -68,15 +70,23 @@ group :test do
 end
 
 # Nosia dependencies
+gem "actioncable-enhanced-postgresql-adapter"
+gem "acts_as_tenant"
 gem "baran"
 gem "commonmarker"
 gem "faraday"
-gem "langchainrb", github: "cbldev/langchainrb", branch: "main"
-gem "langchainrb_rails", github: "cbldev/langchainrb_rails", branch: "main"
+gem "feedjira"
+gem "inline_svg"
+gem "langchainrb", github: "patterns-ai-core/langchainrb", tag: "0.16.1"
+gem "langchainrb_rails", github: "patterns-ai-core/langchainrb_rails", tag: "0.1.12"
 gem "mission_control-jobs", github: "rails/mission_control-jobs", branch: "main"
 gem "neighbor"
 gem "pdf-reader"
 gem "pgvector", "~> 0.2"
+gem "passwordless"
+gem "pundit"
+gem "reverse_markdown"
+gem "rss"
 gem "sequel", "~> 5.68.0"
 gem "solid_queue"
 gem "thruster"

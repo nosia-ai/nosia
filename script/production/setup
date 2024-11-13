@@ -3,7 +3,7 @@
 . ./script/concerns/loader
 
 start_loader "Setting up environment"
-NOSIA_URL=$NOSIA_URL OLLAMA_CHAT_COMPLETION_MODEL=$OLLAMA_CHAT_COMPLETION_MODEL OLLAMA_COMPLETION_MODEL=$OLLAMA_COMPLETION_MODEL OLLAMA_URL=$OLLAMA_URL ./script/production/setup-env &>> ./log/production.log
+NOSIA_URL=$NOSIA_URL OLLAMA_BASE_URL=$OLLAMA_BASE_URL LLM_MODEL=$LLM_MODEL EMBEDDING_MODEL=$EMBEDDING_MODEL CHECK_MODEL=$CHECK_MODEL ./script/production/setup-env &>> ./log/production.log
 stop_loader
 
 start_loader "Setting up Docker"

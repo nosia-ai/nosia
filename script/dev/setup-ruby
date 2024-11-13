@@ -6,7 +6,7 @@ if command -v ruby &> /dev/null; then
 fi
 
 asdf plugin add ruby
-asdf install ruby 3.3.2
-asdf global ruby 3.3.2
+asdf install ruby 3.3.6
+asdf global ruby 3.3.6
 
 gem update --system

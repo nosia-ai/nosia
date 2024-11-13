@@ -1,0 +1,11 @@
+<div class="relative overflow-hidden">
+  <section class="mx-auto relative max-w-screen-2xl p-4 isolate">
+    <div class="mx-auto max-w-2xl">
+      <p class="text-center text-gray-500 font-medium tracking-wide uppercase">BETA</p>
+      <p class="mt-2 text-center text-4xl md:text-6xl font-bold tracking-tight">
+        Nosia
+      </p>
+      <%= render "users/form", user: User.new unless current_user %>
+    </div>
+  </section>
+</div>

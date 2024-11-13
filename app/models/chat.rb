@@ -8,4 +8,13 @@ class Chat < ApplicationRecord
   def last_question
     messages.where(role: "user").order(:created_at).last&.content
   end
+
+  def messages_hash
+    messages.order(:response_number).map do |message|
+      {
+        role: message.role,
+        content: message.content
+      }
+    end
+  end
 end

@@ -45,9 +45,9 @@ Replace `<HOST_IP>` with the IP address of the host machine and run the followin
 
 ```bash
 brew install ollama
-ollama pull phi3:medium
+ollama pull qwen2.5
 ollama pull nomic-embed-text
-OLLAMA_URL=<HOST_IP>:11434 OLLAMA_NUM_PARALLEL=3 OLLAMA_MAX_LOADED_MODELS=2 ollama serve
+OLLAMA_BASE_URL=<HOST_IP>:11434 OLLAMA_MAX_LOADED_MODELS=3 ollama serve
 ```
 
 On the Debian/Ubuntu VM:
@@ -55,7 +55,7 @@ On the Debian/Ubuntu VM:
 Replace `<HOST_IP>` with the IP address of the host machine and run the following command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_URL=http://<HOST_IP>:11434 sh
+curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_BASE_URL=http://<HOST_IP>:11434 sh
 ```
 
 You should see the following output:
@@ -84,14 +84,14 @@ After running the command, you can access Nosia at `https://nosia.localhost:<LOC
 
 ### Custom completion model
 
-By default, Nosia uses the `phi3:medium` completion model and the `nomic-embed-text` embeddings model.
+By default, Nosia uses the `qwen2.5` completion model and the `nomic-embed-text` embeddings model.
 
-You can use any completion model available on Ollama by setting the `OLLAMA_CHAT_COMPLETION_MODEL` and `OLLAMA_COMPLETION_MODEL` environment variables during the installation.
+You can use any completion model available on Ollama by setting the `LLM_MODEL` environment variables during the installation.
 
-For example, to use the `llama3:latest` model, replace `<HOST_IP>` with the IP address of the host machine and run the following command:
+For example, to use the `mistral` model, replace `<HOST_IP>` with the IP address of the host machine and run the following command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_URL=http://<HOST_IP>:11434 OLLAMA_CHAT_COMPLETION_MODEL=llama3:latest OLLAMA_COMPLETION_MODEL=llama3:latest sh
+curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | OLLAMA_BASE_URL=http://<HOST_IP>:11434 LLM_MODEL=mistral sh
 ```
 
 ### Custom embeddings model
