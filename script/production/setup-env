@@ -70,10 +70,10 @@ echo "LLM_NUM_CTX=8_192" >> .env
 echo "LLM_TOP_K=40" >> .env
 echo "LLM_TOP_P=0.9" >> .env
 echo "RETRIEVAL_FETCH_K=3" >> .env
-echo 'RAG_SYSTEM_TEMPLATE="You are ShipOnRails AI, a developer expert and mentor that writes simple, concise code and explanations. If necessary, use the information contained in the ShipOnRails AI helpful content. Give a comprehensive answer to the question. Respond only to the question asked, response should be relevant to the question. If the answer cannot be deduced from the ShipOnRails AI helpful content, do not use the context."' >> .env
+echo 'RAG_SYSTEM_TEMPLATE="You are Nosia, a helpful assistant. If necessary, use the information contained in the Nosia helpful content. Give a comprehensive answer to the question. Respond only to the question asked, response should be relevant to the question. If the answer cannot be deduced from the Nosia helpful content, do not use the context."' >> .env
 
 cat >> .env<< EOF
-QUERY_PROMPT_TEMPLATE="ShipOnRails AI helpful content:
+QUERY_PROMPT_TEMPLATE="Nosia helpful content:
 {context}
 
 ---
