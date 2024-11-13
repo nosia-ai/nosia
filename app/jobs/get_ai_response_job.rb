@@ -24,7 +24,7 @@ class GetAiResponseJob < ApplicationJob
     question = chat.last_question
 
     check_llm = Langchain::LLM::Ollama.new(
-      url: ENV.fetch("OLLAMA_BASE_URL", "http://127.0.0.1:11434"),
+      url: ENV.fetch("OLLAMA_BASE_URL", "http://localhost:11434"),
       api_key: ENV.fetch("OLLAMA_API_KEY", ""),
       default_options: {
         chat_completion_model_name: ENV.fetch("CHECK_MODEL", "bespoke-minicheck"),
