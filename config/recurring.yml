@@ -1,0 +1,4 @@
+# production:
+#   periodic_upgrade_documents:
+#     class: UpgradeDocumentsJob
+#     schedule: at 5am every day

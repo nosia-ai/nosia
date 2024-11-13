@@ -1,6 +1,7 @@
 class Document < ApplicationRecord
   include Chunkable, Parsable, Vectorizable
 
+  belongs_to :author, optional: true
   has_one_attached :file
 
   validates :file, presence: true

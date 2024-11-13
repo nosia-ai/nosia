@@ -65,7 +65,9 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter = :solid_queue
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.connects_to = { database: { writing: :queue } }
+
   # config.active_job.queue_name_prefix = "nosia_production"
 
   config.action_mailer.perform_caching = false
@@ -91,4 +93,17 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch("SMTP_ADDRESS", ""),
+    port: ENV.fetch("SMTP_PORT", ""),
+    user_name: ENV.fetch("SMTP_USER_NAME", ""),
+    password: ENV.fetch("SMTP_PASWORD", ""),
+    authentication: "plain",
+    enable_starttls: true
+  }
+
+  config.action_mailer.default_url_options = { host: ENV.fetch("NOSIA_URL", "https://nosia.localhost") }
+  routes.default_url_options[:host] ||= ENV.fetch("NOSIA_URL", "https://nosia.localhost")
 end

@@ -26,35 +26,21 @@ default: &default
 
 
 development:
-  <<: *default
-  database: nosia_development
-
-  # The specified database role being used to connect to PostgreSQL.
-  # To create additional roles in PostgreSQL see `$ createuser --help`.
-  # When left blank, PostgreSQL will use the default role. This is
-  # the same name as the operating system user running Rails.
-  #username: nosia
-
-  # The password associated with the PostgreSQL role (username).
-  #password:
-
-  # Connect on a TCP socket. Omitted by default since the client uses a
-  # domain socket that doesn't need configuration. Windows does not have
-  # domain sockets, so uncomment these lines.
-  #host: localhost
-
-  # The TCP port the server listens on. Defaults to 5432.
-  # If your server runs on a different port number, change accordingly.
-  #port: 5432
-
-  # Schema search path. The server defaults to $user,public
-  #schema_search_path: myapp,sharedapp,public
-
-  # Minimum log levels, in increasing order:
-  #   debug5, debug4, debug3, debug2, debug1,
-  #   log, notice, warning, error, fatal, and panic
-  # Defaults to warning.
-  #min_messages: notice
+  primary:
+    <<: *default
+    database: nosia_development
+  cache:
+    <<: *default
+    database: nosia_development_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    database: nosia_development_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    database: nosia_development_cable
+    migrations_paths: db/cable_migrate
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -84,5 +70,20 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  primary: &primary_production
+    <<: *default
+    database: nosia_production
+    username: nosia
+    password: <%= ENV["POSTGRES_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: nosia_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: nosia_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: nosia_production_cable
+    migrations_paths: db/cable_migrate
