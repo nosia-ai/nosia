@@ -9,7 +9,7 @@ module Document::Chunkable
     splitter = ::Baran::RecursiveCharacterTextSplitter.new(
       chunk_size: ENV.fetch("CHUNK_SIZE", 1000),
       chunk_overlap: ENV.fetch("CHUNK_SIZE", 200),
-      separator: ENV.fetch("SEPARATORS", ["\n\n", "\n", " "])
+      separators: ENV.fetch("SEPARATORS", [ "\n\n", "\n", " " ])
     )
 
     new_chunks = splitter.chunks(self.content)
