@@ -1,0 +1,7 @@
+#!/bin/bash
+
+case "$OSTYPE" in
+linux*) ./script/linux/setup ;;
+darwin*) ./script/macos/setup ;;
+*) echo "Unsupported $OSTYPE platform" ;;
+esac

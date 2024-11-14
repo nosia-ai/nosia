@@ -1,0 +1,11 @@
+#!/bin/bash
+
+. ./script/concerns/loader
+
+start_loader "Stopping Nosia"
+docker compose down &>>./log/docker.log
+stop_loader
+
+start_loader "Stopping ollama"
+sudo systemctl stop ollama.service &>>./log/ollama.log
+stop_loader

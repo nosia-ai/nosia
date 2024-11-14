@@ -11,9 +11,9 @@ https://github.com/nosia-ai/nosia/assets/1692273/671ccb6a-054c-4dc2-bcd9-2b874a8
 
 https://github.com/nosia-ai/nosia/assets/1692273/ce60094b-abb5-4ed4-93aa-f69485e058b0
 
-## Debian/Ubuntu one command installation
+## macOS, Debian or Ubuntu one command installation
 
-It will install Docker, Ollama, and Nosia on a Debian/Ubuntu machine.
+It will install Docker, Ollama, and Nosia on a macOS, Debian or Ubuntu machine.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-install.sh | sh
@@ -31,7 +31,7 @@ You should see the following output:
 
 You can now access Nosia at `https://nosia.localhost`
 
-## macOS installation with Debian/Ubuntu VM
+## macOS installation with a Debian or Ubuntu VM
 
 On macOS, install Homebrew:
 
@@ -46,6 +46,7 @@ Replace `<HOST_IP>` with the IP address of the host machine and run the followin
 ```bash
 brew install ollama
 ollama pull qwen2.5
+ollama pull bespoke-minicheck
 ollama pull nomic-embed-text
 OLLAMA_BASE_URL=<HOST_IP>:11434 OLLAMA_MAX_LOADED_MODELS=3 ollama serve
 ```
@@ -84,7 +85,7 @@ After running the command, you can access Nosia at `https://nosia.localhost:<LOC
 
 ### Custom completion model
 
-By default, Nosia uses the `qwen2.5` completion model and the `nomic-embed-text` embeddings model.
+By default, Nosia uses the `qwen2.5` completion model, the `nomic-embed-text` embeddings model and the `bespoke-minicheck` checking model.
 
 You can use any completion model available on Ollama by setting the `LLM_MODEL` environment variables during the installation.
 
@@ -104,14 +105,15 @@ You can start, upgrade and stop the services with the following commands:
 
 ```bash
 cd nosia
-./script/production/start
-./script/production/upgrade
-./script/production/stop
+./script/start
+./script/upgrade
+./script/stop
 ```
 
 ## Troubleshooting
 
 If you encounter any issue:
+
 - during the installation, you can check the logs at `./log/production.log`
 - during the use waiting for an AI response, you can check the jobs at `http://<IP>:3000/jobs`
 - with Nosia, you can check the logs with `docker compose -f ./docker-compose.yml logs -f`

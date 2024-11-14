@@ -4,4 +4,3 @@
 ./script/dev/setup-asdf
 ./script/dev/setup-ruby
 ./bin/setup
-./script/ollama/setup
