@@ -1,19 +1,18 @@
 Rails.application.routes.draw do
-  mount Mailbin::Engine => :mailbin if Rails.env.development?
-
   # Authentication routes
-  passwordless_for :users
-  resources :users, only: [ :new, :create ]
+  resources :users, only: [ :create ]
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
 
   # User routes
-  constraints Passwordless::Constraint.new(User) do
+  constraints Authentication::Authenticated do
     resources :chats, only: [ :show, :create, :destroy ] do
       resources :messages, only: [ :create ]
     end
   end
 
   # Admin routes
-  constraints Passwordless::Constraint.new(User, if: ->(user) { user.admin? }) do
+  constraints Authentication::Admin do
     mount MissionControl::Jobs::Engine, at: "/jobs"
 
     resources :documents
