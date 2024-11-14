@@ -2,56 +2,54 @@
 
 . ./script/concerns/loader
 
-start_loader "Setting up prerequisites"
+start_loader "Setting up prerequisites: brew and openssl"
 
 # Install brew if not installed
-if ! command -v brew &> /dev/null
-then
-  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | sh &> ./log/setup.log
+if ! command -v brew &>/dev/null; then
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | sh &>./log/setup.log
 fi
 
 # Install openssl if not installed
-if ! brew list openssl &> /dev/null
-then
-  brew install openssl &> ./log/setup.log
+if ! brew list openssl &>/dev/null; then
+  brew install openssl &>./log/setup.log
 fi
 
 stop_loader
 
 start_loader "Setting up ollama"
 # Install ollama if not installed
-if ! brew list ollama &> /dev/null
-then
-  brew install ollama &> ./log/setup.log
+if ! brew list ollama &>/dev/null; then
+  brew install ollama &>./log/setup.log
 fi
 stop_loader
 
 start_loader "Pulling models. This may take a while..."
-# Pull Mistral and Nomic Embed Text models from registry
-brew services start ollama &> ./log/setup.log
+# Start ollama
+brew services start ollama &>./log/setup.log
 # Wait for ollama to start
 sleep 5
-ollama pull mistral:7b &> ./log/setup.log
-ollama pull nomic-embed-text &> ./log/setup.log
+# Pull models
+ollama pull $LLM_MODEL &>./log/setup.log
+ollama pull bespoke-minicheck &>./log/setup.log
+ollama pull nomic-embed-text &>./log/setup.log
 stop_loader
 
 start_loader "Setting up podman"
 # Install podman if not installed
-if ! brew list podman &> /dev/null
-then
-  brew install podman podman-compose &> ./log/setup.log
+if ! brew list podman &>/dev/null; then
+  brew install podman podman-compose &>./log/setup.log
 fi
 stop_loader
 
 start_loader "Setting up Nosia"
 # Initialize podman machine
-podman machine init &> ./log/setup.log
+podman machine init &>./log/setup.log
 # Set podman to rootful mode
-podman machine set --rootful &> ./log/setup.log
+podman machine set --rootful &>./log/setup.log
 # Start podman machine
-podman machine start &> ./log/setup.log
+podman machine start &>./log/setup.log
 # Set environment variables for Nosia
-OLLAMA_URL=http://host.containers.internal:11434 ./script/concerns/setup-env &> ./log/setup.log
+OLLAMA_BASE_URL=http://host.containers.internal:11434 ./script/concerns/setup-env &>./log/setup.log
 # Build Nosia
-podman-compose --env-file .env build &> ./log/setup.log
+podman-compose --env-file .env build &>./log/setup.log
 stop_loader

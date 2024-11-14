@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-if command -v ruby &> /dev/null; then
+if command -v ruby &>/dev/null; then
   echo "Ruby is already installed"
   exit 0
 fi

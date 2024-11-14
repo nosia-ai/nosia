@@ -14,7 +14,7 @@ else
   NOSIA_URL=https://nosia.localhost
 fi
 
-if [ -n "$OLLAMA_URL" ]; then
+if [ -n "$OLLAMA_BASE_URL" ]; then
   echo "Using OLLAMA_BASE_URL from environment"
 else
   echo "OLLAMA_BASE_URL is not set, using default value"
@@ -53,7 +53,7 @@ SECRET_KEY_BASE=$(openssl rand -hex 64)
 echo "DATABASE_URL=$DATABASE_URL" >.env
 echo "NOSIA_URL=$NOSIA_URL" >>.env
 echo "OLLAMA_BASE_URL=$OLLAMA_BASE_URL" >>.env
-echo "OLLAMA_API_KEY=" >> .env
+echo "OLLAMA_API_KEY=" >>.env
 echo "LLM_MODEL=$LLM_MODEL" >>.env
 echo "CHECK_MODEL=$CHECK_MODEL" >>.env
 echo "EMBEDDING_MODEL=$EMBEDDING_MODEL" >>.env

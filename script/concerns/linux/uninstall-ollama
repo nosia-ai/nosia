@@ -1,9 +1,5 @@
 #!/bin/bash -e
 
-. ./script/concerns/loader
-
-start_loader "Removing ollama"
-
 # Remove the ollama service:
 sudo systemctl stop ollama
 sudo systemctl disable ollama
@@ -16,5 +12,3 @@ sudo rm $(which ollama)
 sudo rm -r /usr/share/ollama
 sudo userdel ollama
 sudo groupdel ollama
-
-stop_loader
