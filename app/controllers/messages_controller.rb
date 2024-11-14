@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   include ActionView::RecordIdentifier
 
   def create
-    @chat = current_user.chats.find(params[:chat_id])
+    @chat = Current.user.chats.find(params[:chat_id])
     @message = @chat.messages.create(
       message_params.merge(
         role: "user",
