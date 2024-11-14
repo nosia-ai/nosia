@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 play_loader_loop() {
-  local animation=( ⌛️ ⏳ ⌛️ ⏳ )
+  local animation=(⌛️ ⏳ ⌛️ ⏳)
 
-  while true ; do
-    for frame in "${animation[@]}" ; do
+  while true; do
+    for frame in "${animation[@]}"; do
       printf "\r%s" "${frame}"
       sleep 0.25
     done
@@ -21,19 +21,19 @@ start_loader() {
 
 stop_loader() {
   printf "\r✅"
-  kill "${loader_pid}" &> /dev/null
+  kill "${loader_pid}" &>/dev/null
   printf "\n"
   tput cnorm # Restore the terminal cursor
 }
 
 exit_loader() {
   printf "\r   ${MESSAGE}\n"
-  kill "${loader_pid}" &> /dev/null
+  kill "${loader_pid}" &>/dev/null
   tput cnorm # Restore the terminal cursor
 }
 
 kill_loader() {
-  kill "${loader_pid}" &> /dev/null
+  kill "${loader_pid}" &>/dev/null
   tput cnorm # Restore the terminal cursor
 }
 

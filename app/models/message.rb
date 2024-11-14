@@ -1,7 +1,7 @@
 class Message < ApplicationRecord
   include ActionView::RecordIdentifier
 
-  enum role: { system: 0, assistant: 10, user: 20 }
+  enum :role, { system: 0, assistant: 10, user: 20 }
 
   belongs_to :chat
 
@@ -27,7 +27,11 @@ class Message < ApplicationRecord
   end
 
   def similar_documents
-    Document.where(id: similar_document_ids)
+    Document.where(id: similar_document_ids.uniq)
+  end
+
+  def similar_authors
+    Author.where(id: similar_documents.pluck(:author_id))
   end
 
   def to_html

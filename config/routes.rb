@@ -1,10 +1,22 @@
 Rails.application.routes.draw do
-  mount MissionControl::Jobs::Engine, at: "/jobs"
+  # Authentication routes
+  resources :users, only: [ :create ]
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
 
-  resources :chats, only: [:show, :create, :destroy] do
-    resources :messages, only: [:create]
+  # User routes
+  constraints Authentication::Authenticated do
+    resources :chats, only: [ :show, :create, :destroy ] do
+      resources :messages, only: [ :create ]
+    end
   end
-  resources :documents
+
+  # Admin routes
+  constraints Authentication::Admin do
+    mount MissionControl::Jobs::Engine, at: "/jobs"
+
+    resources :documents
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -15,5 +27,5 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "documents#index"
+  root "static#index"
 end

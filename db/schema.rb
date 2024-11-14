@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_06_28_210314) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_14_124933) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -43,9 +43,20 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_210314) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "url"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "chats", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
   create_table "chunks", force: :cascade do |t|
@@ -57,12 +68,27 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_210314) do
     t.index ["document_id"], name: "index_chunks_on_document_id"
   end
 
+  create_table "credentials", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "provider"
+    t.text "uid"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credentials_on_user_id"
+  end
+
   create_table "documents", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.vector "embedding", limit: 768
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "source_url"
+    t.bigint "author_id"
+    t.string "uid"
+    t.string "content_hash"
+    t.index ["author_id"], name: "index_documents_on_author_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -74,6 +100,29 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_210314) do
     t.datetime "updated_at", null: false
     t.string "similar_document_ids", default: [], array: true
     t.index ["chat_id"], name: "index_messages_on_chat_id"
+  end
+
+  create_table "passwordless_sessions", force: :cascade do |t|
+    t.string "authenticatable_type"
+    t.integer "authenticatable_id"
+    t.datetime "timeout_at", precision: nil, null: false
+    t.datetime "expires_at", precision: nil, null: false
+    t.datetime "claimed_at", precision: nil
+    t.string "token_digest", null: false
+    t.string "identifier", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
+    t.index ["identifier"], name: "index_passwordless_sessions_on_identifier", unique: true
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -135,7 +184,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_210314) do
     t.string "hostname"
     t.text "metadata"
     t.datetime "created_at", null: false
+    t.string "name", null: false
     t.index ["last_heartbeat_at"], name: "index_solid_queue_processes_on_last_heartbeat_at"
+    t.index ["name", "supervisor_id"], name: "index_solid_queue_processes_on_name_and_supervisor_id", unique: true
     t.index ["supervisor_id"], name: "index_solid_queue_processes_on_supervisor_id"
   end
 
@@ -156,6 +207,22 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_210314) do
     t.datetime "created_at", null: false
     t.index ["job_id"], name: "index_solid_queue_recurring_executions_on_job_id", unique: true
     t.index ["task_key", "run_at"], name: "index_solid_queue_recurring_executions_on_task_key_and_run_at", unique: true
+  end
+
+  create_table "solid_queue_recurring_tasks", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "schedule", null: false
+    t.string "command", limit: 2048
+    t.string "class_name"
+    t.text "arguments"
+    t.string "queue_name"
+    t.integer "priority", default: 0
+    t.boolean "static", default: true, null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_solid_queue_recurring_tasks_on_key", unique: true
+    t.index ["static"], name: "index_solid_queue_recurring_tasks_on_static"
   end
 
   create_table "solid_queue_scheduled_executions", force: :cascade do |t|
@@ -179,10 +246,23 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_28_210314) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
+    t.string "password_digest"
+    t.index "lower((email)::text)", name: "index_users_on_lowercase_email", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chats", "users"
   add_foreign_key "chunks", "documents"
+  add_foreign_key "credentials", "users"
+  add_foreign_key "documents", "authors"
   add_foreign_key "messages", "chats"
+  add_foreign_key "sessions", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

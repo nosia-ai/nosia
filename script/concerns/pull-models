@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+if ! command -v ollama &>/dev/null; then
+  echo "ollama is not installed"
+  exit 0
+fi
+
+if [ -n "$LLM_MODEL" ]; then
+  ollama pull $LLM_MODEL
+else
+  ollama pull qwen2.5
+fi
+ollama pull bespoke-minicheck
+ollama pull nomic-embed-text

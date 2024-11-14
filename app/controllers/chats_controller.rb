@@ -5,7 +5,7 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = Chat.create
+    @chat = Current.user.chats.create
     redirect_to @chat
   end
 
@@ -17,6 +17,6 @@ class ChatsController < ApplicationController
   private
 
   def set_chat
-    @chat = Chat.find(params[:id])
+    @chat = Current.user.chats.find(params[:id])
   end
 end

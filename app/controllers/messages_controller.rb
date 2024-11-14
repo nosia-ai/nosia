@@ -2,7 +2,13 @@ class MessagesController < ApplicationController
   include ActionView::RecordIdentifier
 
   def create
-    @message = Message.create(message_params.merge(chat_id: params[:chat_id], role: "user"))
+    @chat = Current.user.chats.find(params[:chat_id])
+    @message = @chat.messages.create(
+      message_params.merge(
+        role: "user",
+        response_number: @chat.messages.count
+      ),
+    )
     GetAiResponseJob.perform_later(@message.chat_id)
 
     respond_to do |format|

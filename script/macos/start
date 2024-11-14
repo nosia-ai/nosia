@@ -1,0 +1,12 @@
+#!/bin/bash
+
+. ./script/concerns/loader
+
+start_loader "Starting ollama"
+OLLAMA_MAX_LOADED_MODELS=3 ollama serve &>./log/ollama.log &
+stop_loader
+
+start_loader "Starting Nosia"
+podman machine start &>./log/podman.log
+podman-compose --env-file .env up -d &>./log/podman.log
+stop_loader
