@@ -2,9 +2,11 @@
 
 . ./script/concerns/loader
 
-start_loader "Starting ollama"
-sudo systemctl start ollama.service &>>./log/ollama.log
-stop_loader
+if command -v ollama &>/dev/null; then
+  start_loader "Starting ollama"
+  sudo systemctl start ollama.service &>>./log/ollama.log
+  stop_loader
+fi
 
 start_loader "Starting Nosia"
 docker compose --env-file .env up -d &>>./log/docker.log

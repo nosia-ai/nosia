@@ -2,9 +2,11 @@
 
 . ./script/concerns/loader
 
-start_loader "Starting ollama"
-OLLAMA_MAX_LOADED_MODELS=3 ollama serve &>./log/ollama.log &
-stop_loader
+if brew list ollama &>/dev/null; then
+  start_loader "Starting ollama"
+  OLLAMA_MAX_LOADED_MODELS=3 ollama serve &>./log/ollama.log &
+  stop_loader
+fi
 
 start_loader "Starting Nosia"
 podman machine start &>./log/podman.log

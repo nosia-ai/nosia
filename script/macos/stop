@@ -7,6 +7,8 @@ podman-compose down &>./log/podman.log
 podman machine stop &>./log/podman.log
 stop_loader
 
-start_loader "Stopping ollama"
-killall "ollama" &>./log/ollama.log
-stop_loader
+if brew list ollama &>/dev/null; then
+  start_loader "Stopping ollama"
+  killall "ollama" &>./log/ollama.log
+  stop_loader
+fi
