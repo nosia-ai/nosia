@@ -6,6 +6,8 @@ start_loader "Stopping Nosia"
 docker compose down &>>./log/docker.log
 stop_loader
 
-start_loader "Stopping ollama"
-sudo systemctl stop ollama.service &>>./log/ollama.log
-stop_loader
+if command -v ollama &>/dev/null; then
+  start_loader "Stopping ollama"
+  sudo systemctl stop ollama.service &>>./log/ollama.log
+  stop_loader
+fi
