@@ -5,11 +5,11 @@ It is designed to be easy to install and use.
 
 ## Easy to install
 
-https://github.com/nosia-ai/nosia/assets/1692273/671ccb6a-054c-4dc2-bcd9-2b874a888548
+<https://github.com/nosia-ai/nosia/assets/1692273/671ccb6a-054c-4dc2-bcd9-2b874a888548>
 
 ## Easy to use
 
-https://github.com/nosia-ai/nosia/assets/1692273/ce60094b-abb5-4ed4-93aa-f69485e058b0
+<https://github.com/nosia-ai/nosia/assets/1692273/ce60094b-abb5-4ed4-93aa-f69485e058b0>
 
 ## macOS, Debian or Ubuntu one command installation
 
@@ -109,6 +109,60 @@ cd nosia
 ./script/upgrade
 ./script/stop
 ```
+
+## OpenAI chat compatible API
+
+1. Go as a logged in user to <https://nosia.localhost/api_tokens>
+
+2. Generate and copy your token
+
+3. Use your favorite OpenAI chat API client by configuring API base to `https://nosia.localhost/v1` and API key with your token.
+
+### Try the API
+
+1. Install HTTPie CLI or use any HTTP client of your choice:
+
+2. Try the stream API by creating a `test-stream.json` file with the following content:
+
+```json
+{"messages":[{"role":"user","content":"When Ruby 3.3.7 will be released?"}],"model":"qwen2.5","stream":true,"top_p":0.9,"top_k":40.0,"temperature":0.1}
+```
+
+3. Replace `<token>` with your token and run the following command:
+
+```sh
+http -A bearer -a <token> --stream POST https://nosia.localhost/v1/completions < test-stream.json
+```
+
+4. Try the API without streaming by creating a `test-non-stream.json` file with the following content:
+
+```json
+{"messages":[{"role":"user","content":"When Ruby 3.3.7 will be released?"}],"model":"qwen2.5","stream":false,"top_p":0.9,"top_k":40.0,"temperature":0.1}
+```
+
+5. Replace `<token>` with your token and run the following command:
+
+```sh
+http -A bearer -a <token> POST https://nosia.localhost/v1/completions < test-non-stream.json
+```
+
+## Continue.dev integration
+
+1. In your `~/.continue/config.json`, configure a `nosia` model:
+
+```json
+  "models": [
+    {
+      "model": "nosia",
+      "provider": "openai",
+      "apiBase": "https://nosia.localhost/v1",
+      "apiKey": "token",
+      "title": "Nosia"
+    }
+  ]
+```
+
+2. Enjoy!
 
 ## Troubleshooting
 

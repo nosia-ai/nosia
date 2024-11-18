@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
 
+  # API routes
+  post "v1/chat/completions", to: "api/v1/completions#create"
+  post "v1/completions", to: "api/v1/completions#create"
+
   # User routes
   constraints Authentication::Authenticated do
+    resources :api_tokens, only: [ :index, :create, :destroy ]
     resources :chats, only: [ :show, :create, :destroy ] do
       resources :messages, only: [ :create ]
     end
