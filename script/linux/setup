@@ -24,5 +24,7 @@ start_loader "Setting up Nosia"
 # Set environment variables for Nosia
 ./script/concerns/setup-env &>>./log/setup.log
 # Build Nosia
-docker compose --env-file .env build &>>./log/setup.log
+newgrp docker << EOF
+  docker compose --env-file .env build &>>./log/setup.log
+EOF
 stop_loader
