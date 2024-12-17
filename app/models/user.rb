@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :account_users, dependent: :destroy
+  has_many :accounts, through: :account_users
   has_many :api_tokens, dependent: :destroy
   has_many :chats, dependent: :destroy
   has_many :credentials, dependent: :destroy

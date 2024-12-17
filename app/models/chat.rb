@@ -1,4 +1,8 @@
 class Chat < ApplicationRecord
+  include Completionable
+  include Infomaniak
+  include Ollama
+
   has_many :messages, dependent: :destroy
 
   def first_question
@@ -16,5 +20,9 @@ class Chat < ApplicationRecord
         content: message.content
       }
     end
+  end
+
+  def response_number
+    messages.count
   end
 end

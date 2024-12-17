@@ -2,7 +2,7 @@ module Document::Chunkable
   extend ActiveSupport::Concern
 
   included do
-    has_many :chunks, dependent: :destroy
+    has_many :chunks, as: :chunkable, dependent: :destroy
   end
 
   def chunkify!
