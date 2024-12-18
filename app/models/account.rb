@@ -3,6 +3,7 @@ class Account < ApplicationRecord
 
   has_many :account_users, dependent: :destroy
   has_many :users, through: :account_users
-  has_many :chunks
+  has_many :chats, dependent: :destroy
+  has_many :chunks, dependent: :destroy
   has_many :documents, dependent: :destroy
 end

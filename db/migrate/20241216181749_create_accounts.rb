@@ -3,13 +3,13 @@ class CreateAccounts < ActiveRecord::Migration[8.0]
     create_table :accounts do |t|
       t.string :name
       t.belongs_to :owner, null: false, foreign_key: { to_table: :users }
+      t.string :uid
 
       t.timestamps
     end
 
-    User.all.each do |user|
-      Account.create(name: user.email, owner: user)
-    end
+    owner = User.order(:created_at).first
+    account = Account.find_or_create_by(name: "First account", owner:)
   end
 
   def down

@@ -7,8 +7,9 @@ class CreateAccountUsers < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    Account.all.each do |account|
-      account.account_users.create(user: account.owner)
+    account = Account.find_by(name: "First account")
+    User.all.each do |user|
+      user.account_users.find_or_create_by(account:)
     end
   end
 

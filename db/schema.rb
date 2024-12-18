@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_16_213448) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_18_200949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_213448) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.bigint "owner_id", null: false
+    t.string "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
@@ -84,6 +85,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_213448) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_chats_on_account_id"
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
@@ -94,7 +97,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_213448) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "chunkable_type"
-    t.bigint "account_id"
+    t.bigint "account_id", null: false
     t.index ["account_id"], name: "index_chunks_on_account_id"
     t.index ["chunkable_type", "chunkable_id"], name: "index_chunks_on_chunkable_type_and_chunkable_id"
   end
@@ -120,7 +123,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_213448) do
     t.string "uid"
     t.string "content_hash"
     t.string "purpose"
-    t.bigint "account_id"
+    t.bigint "account_id", null: false
     t.index ["account_id"], name: "index_documents_on_account_id"
     t.index ["author_id"], name: "index_documents_on_author_id"
   end
@@ -297,6 +300,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_213448) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_tokens", "accounts"
   add_foreign_key "api_tokens", "users"
+  add_foreign_key "chats", "accounts"
   add_foreign_key "chats", "users"
   add_foreign_key "chunks", "accounts"
   add_foreign_key "chunks", "documents", column: "chunkable_id"

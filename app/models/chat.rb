@@ -3,6 +3,8 @@ class Chat < ApplicationRecord
   include Infomaniak
   include Ollama
 
+  belongs_to :account
+  belongs_to :user
   has_many :messages, dependent: :destroy
 
   def first_question

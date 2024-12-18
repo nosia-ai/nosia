@@ -2,10 +2,8 @@ class AddAccountReferencesToApiTokens < ActiveRecord::Migration[8.0]
   def up
     add_reference :api_tokens, :account, null: true, foreign_key: true
 
-    ApiToken.all.each do |api_token|
-      account = Account.find_by(owner: api_token.user)
-      api_token.update(account:)
-    end
+    account = Account.find_by(name: "First account")
+    ApiToken.update_all(account_id: account.id)
 
     change_column_null :api_tokens, :account_id, false
   end

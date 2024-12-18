@@ -32,7 +32,7 @@ module Chat::Infomaniak
     assistant_response = messages.create(role: "assistant", done: false, content: "", response_number:)
     assistant_response.broadcast_created
 
-    retrieved_chunks = Chunk.similarity_search(question, k: retrieval_fetch_k)
+    retrieved_chunks = Chunk.where(account:).similarity_search(question, k: retrieval_fetch_k)
     assistant_response.update(similar_document_ids: retrieved_chunks.pluck(:chunkable_id).uniq) if retrieved_chunks.any?
 
     if retrieved_chunks.any?

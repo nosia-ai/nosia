@@ -48,7 +48,7 @@ module Chat::Ollama
 
     check_llm = Chat.new_ollama_check_llm
 
-    search_results = Chunk.similarity_search(question, k: retrieval_fetch_k)
+    search_results = Chunk.where(account:).similarity_search(question, k: retrieval_fetch_k)
     search_results.each do |search_result|
       context_to_check = search_result.content
 

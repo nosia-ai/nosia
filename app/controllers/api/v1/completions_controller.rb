@@ -6,7 +6,10 @@ module Api
       include ActionController::Live
 
       def create
-        @chat = @user.chats.create
+        account = @user.accounts.find_or_create_by(uid: completion_params[:user]) if completion_params[:user].present?
+        account ||= @account
+
+        @chat = @user.chats.create(account:)
 
         if completion_params[:messages].present?
           completion_params[:messages].each do |message_params|
@@ -85,6 +88,7 @@ module Api
           :top_p,
           :top_k,
           :temperature,
+          :user,
           messages: [
             :content,
             :role

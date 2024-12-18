@@ -6,7 +6,12 @@ class ApiTokensController < ApplicationController
   end
 
   def create
-    @api_token = Current.user.api_tokens.new(api_token_params)
+    account = Current.user.accounts.find(api_token_params[:account_id])
+
+    @api_token = Current.user.api_tokens.new(
+      account:,
+      name: api_token_params[:name]
+    )
 
     if @api_token.save
       redirect_to api_tokens_path
@@ -24,6 +29,6 @@ class ApiTokensController < ApplicationController
   private
 
   def api_token_params
-    params.require(:api_token).permit(:name)
+    params.require(:api_token).permit(:account_id, :name)
   end
 end

@@ -7,6 +7,8 @@
     <div class="flex items-center space-x-4">
       <h3 class="text-xl w-32 truncate"><%= api_token.name %></h3>
 
+      <p><%= api_token.account.name %></p>
+
       <%= button_to api_token, method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
         <svg
           xmlns="http://www.w3.org/2000/svg"

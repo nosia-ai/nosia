@@ -19,7 +19,7 @@ module Document::Chunkable
     self.chunks.destroy_all
 
     new_chunks.each do |new_chunk|
-      chunk = self.chunks.create!(content: new_chunk.dig(:text))
+      chunk = self.chunks.create!(account:, content: new_chunk.dig(:text))
       chunk.vectorize!
     end
   end
