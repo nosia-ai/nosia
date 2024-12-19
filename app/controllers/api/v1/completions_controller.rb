@@ -8,11 +8,11 @@ module Api
       def create
         @chat = @user.chats.create(account: @account)
 
-        max_tokens = (completion_params[:max_tokens] || ENV["LLM_MAX_TOKENS"]).to_i
-        model = (completion_params[:model] || ENV["LLM_MODEL"]).to_i
-        temperature = (completion_params[:temperature] || ENV["LLM_TEMPERATURE"]).to_f
-        top_k = (completion_params[:top_k] || ENV["LLM_TOP_K"]).to_f
-        top_p = (completion_params[:top_p] || ENV["LLM_TOP_P"]).to_f
+        max_tokens = completion_params[:max_tokens]&.to_i
+        model = completion_params[:model]
+        temperature = completion_params[:temperature]&.to_f
+        top_k = completion_params[:top_k]&.to_f
+        top_p = completion_params[:top_p]&.to_f
 
         if completion_params[:messages].present?
           completion_params[:messages].each do |message_params|

@@ -2,7 +2,7 @@ module Chat::Infomaniak
   extend ActiveSupport::Concern
 
   class_methods do
-    def new_infomaniak_llm(model: ENV.fetch("LLM_MODEL", "mixtral"))
+    def new_infomaniak_llm(model:)
       Langchain::LLM::OpenAI.new(
         api_key: ENV.fetch("INFOMANIAK_API_KEY", ""),
         llm_options: {
