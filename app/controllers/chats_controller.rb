@@ -5,7 +5,7 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = Current.user.chats.create
+    @chat = Current.user.chats.create(account: Current.account)
     redirect_to @chat
   end
 
