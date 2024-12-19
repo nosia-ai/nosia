@@ -2,7 +2,7 @@ module Chat::Infomaniak
   extend ActiveSupport::Concern
 
   class_methods do
-    def new_infomaniak_llm
+    def new_infomaniak_llm(model: ENV.fetch("LLM_MODEL", "mixtral"))
       Langchain::LLM::OpenAI.new(
         api_key: ENV.fetch("INFOMANIAK_API_KEY", ""),
         llm_options: {
@@ -10,8 +10,8 @@ module Chat::Infomaniak
           uri_base: "https://api.infomaniak.com/1/ai/#{ENV.fetch("INFOMANIAK_PRODUCT_ID", "")}/openai"
         },
         default_options: {
-          chat_completion_model_name: ENV.fetch("LLM_MODEL", "mixtral"),
-          completion_model_name: ENV.fetch("LLM_MODEL", "mixtral"),
+          chat_completion_model_name: model,
+          completion_model_name: model,
           embeddings_model_name: ENV.fetch("EMBEDDING_MODEL", "bge_multilingual_gemma2"),
           temperature: ENV.fetch("LLM_TEMPERATURE", 0.1).to_f,
           num_ctx: ENV.fetch("LLM_NUM_CTX", 4_096).to_i
@@ -20,7 +20,7 @@ module Chat::Infomaniak
     end
   end
 
-  def complete_with_infomaniak(&block)
+  def complete_with_infomaniak(model:, temperature:, top_p:, max_tokens:, &block)
     question = last_question
 
     context = []
@@ -49,8 +49,8 @@ module Chat::Infomaniak
 
     messages_for_assistant = messages_for_assistant.flatten
 
-    llm = Chat.new_infomaniak_llm
-    llm_response = llm.chat(messages: messages_for_assistant, &block)
+    llm = Chat.new_infomaniak_llm(model:)
+    llm_response = llm.chat(messages: messages_for_assistant, temperature:, top_p:, max_tokens:, &block)
 
     assistant_response.update(done: true, content: llm_response.completion)
     assistant_response

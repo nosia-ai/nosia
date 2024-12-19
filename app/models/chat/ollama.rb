@@ -32,7 +32,7 @@ module Chat::Ollama
     end
   end
 
-  def complete_with_ollama(&block)
+  def complete_with_ollama(top_k:, top_p:, &block)
     question = last_question
 
     context = []

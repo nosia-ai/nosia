@@ -7,12 +7,12 @@ module Chat::Completionable
     end
   end
 
-  def complete(&block)
+  def complete(model:, temperature:, top_k:, top_p:, max_tokens:, &block)
     case Chat.ai_provider
     when "ollama"
-      complete_with_ollama(&block)
+      complete_with_ollama(top_k:, top_p:, &block)
     when "infomaniak"
-      complete_with_infomaniak(&block)
+      complete_with_infomaniak(model:, temperature:, top_p:, max_tokens:, &block)
     end
   end
 

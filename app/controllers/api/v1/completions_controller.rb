@@ -6,10 +6,13 @@ module Api
       include ActionController::Live
 
       def create
-        account = @user.accounts.find_or_create_by(uid: completion_params[:user]) if completion_params[:user].present?
-        account ||= @account
+        @chat = @user.chats.create(account: @account)
 
-        @chat = @user.chats.create(account:)
+        max_tokens = (completion_params[:max_tokens] || ENV["LLM_MAX_TOKENS"]).to_i
+        model = (completion_params[:model] || ENV["LLM_MODEL"]).to_i
+        temperature = (completion_params[:temperature] || ENV["LLM_TEMPERATURE"]).to_f
+        top_k = (completion_params[:top_k] || ENV["LLM_TOP_K"]).to_f
+        top_p = (completion_params[:top_p] || ENV["LLM_TOP_P"]).to_f
 
         if completion_params[:messages].present?
           completion_params[:messages].each do |message_params|
@@ -30,7 +33,7 @@ module Api
         stream_response = ActiveModel::Type::Boolean.new.cast(params[:stream]) || false
 
         if stream_response
-          chat_response = @chat.complete do |stream|
+          chat_response = @chat.complete(model:, temperature:, top_k:, top_p:, max_tokens:) do |stream|
             stream_content = stream.dig("delta", "content")
             next unless stream_content
             done = !!stream.dig("finish_reason")
@@ -56,7 +59,7 @@ module Api
             end
           end
         else
-          chat_response = @chat.complete
+          chat_response = @chat.complete(model:, temperature:, top_k:, top_p:, max_tokens:)
           render json: {
             choices: [
               finish_reason: "stop",
@@ -85,8 +88,8 @@ module Api
           :model,
           :prompt,
           :stream,
-          :top_p,
           :top_k,
+          :top_p,
           :temperature,
           :user,
           messages: [
