@@ -49,7 +49,12 @@ module Chat::Infomaniak
   end
 
   def fetch_context(question)
-    retrieved_chunks = Chunk.where(account:).similarity_search(question, k: retrieval_fetch_k)
+    if ActiveModel::Type::Boolean.new.cast(ENV.fetch("AUGMENTED_CONTEXT", false))
+      retrieved_chunks = Chunk.where(account:).all
+    else
+      retrieved_chunks = Chunk.where(account:).similarity_search(question, k: retrieval_fetch_k)
+    end
+
     return unless retrieved_chunks.any?
 
     retrieved_chunks.map(&:content).join("\n\n")
