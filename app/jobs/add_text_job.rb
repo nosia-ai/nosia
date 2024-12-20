@@ -1,5 +1,4 @@
-
-class AddQnaJob < ApplicationJob
+class AddTextJob < ApplicationJob
   queue_as :default
 
   def perform(text_id)
