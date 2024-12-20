@@ -18,6 +18,9 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  <% if ENV["DB_HOST"] %>
+  host: <%= ENV["DB_HOST"] %>
+  <% end %>
 
 development:
   primary:
@@ -66,7 +69,13 @@ test:
 production:
   primary: &primary_production
     <<: *default
+    <% if ENV["DATABASE_URL"] %>
     url: <%= ENV["DATABASE_URL"] %>
+    <% else %>
+    database: nosia_production
+    username: nosia
+    password: <%= ENV["POSTGRES_PASSWORD"] %>
+    <% end %>
   cache:
     <<: *primary_production
     database: nosia_production_cache
