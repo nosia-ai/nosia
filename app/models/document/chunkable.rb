@@ -6,7 +6,7 @@ module Document::Chunkable
   end
 
   def chunkify!
-    separators = JSON.parse(ENV.fetch("SEPARATORS", [ "\n\n", "\n", " " ]))
+    separators = JSON.parse(ENV.fetch("SEPARATORS", [ "\n\n", "\n", " " ].to_s))
 
     splitter = ::Baran::RecursiveCharacterTextSplitter.new(
       chunk_size: ENV.fetch("CHUNK_SIZE", 1000).to_i,
