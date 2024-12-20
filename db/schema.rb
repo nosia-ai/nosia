@@ -154,6 +154,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_18_200949) do
     t.index ["identifier"], name: "index_passwordless_sessions_on_identifier", unique: true
   end
 
+  create_table "qnas", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.text "question"
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_qnas_on_account_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "ip_address"
@@ -284,6 +293,14 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_18_200949) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "texts", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_texts_on_account_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.datetime "created_at", null: false
@@ -291,6 +308,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_18_200949) do
     t.boolean "admin", default: false
     t.string "password_digest"
     t.index "lower((email)::text)", name: "index_users_on_lowercase_email", unique: true
+  end
+
+  create_table "websites", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "url"
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_websites_on_account_id"
   end
 
   add_foreign_key "account_users", "accounts"
@@ -308,6 +334,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_18_200949) do
   add_foreign_key "documents", "accounts"
   add_foreign_key "documents", "authors"
   add_foreign_key "messages", "chats"
+  add_foreign_key "qnas", "accounts"
   add_foreign_key "sessions", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
@@ -315,4 +342,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_18_200949) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "texts", "accounts"
+  add_foreign_key "websites", "accounts"
 end
