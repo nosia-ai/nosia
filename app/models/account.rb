@@ -9,4 +9,13 @@ class Account < ApplicationRecord
   has_many :qnas, dependent: :destroy
   has_many :texts, dependent: :destroy
   has_many :websites, dependent: :destroy
+
+  def context
+    context = []
+    context << texts.map(&:context)
+    context << qnas.map(&:context)
+    context << documents.map(&:context)
+    context << websites.map(&:context)
+    context.join("\n\n")
+  end
 end

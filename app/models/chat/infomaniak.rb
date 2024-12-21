@@ -50,14 +50,12 @@ module Chat::Infomaniak
 
   def fetch_context(question)
     if ActiveModel::Type::Boolean.new.cast(ENV.fetch("AUGMENTED_CONTEXT", false))
-      retrieved_chunks = Chunk.where(account:).all
+      account.context
     else
-      retrieved_chunks = Chunk.where(account:).similarity_search(question, k: retrieval_fetch_k)
+      retrieved_chunks = account.chunks.similarity_search(question, k: retrieval_fetch_k)
+      return unless retrieved_chunks.any?
+      retrieved_chunks.map(&:content).join("\n\n")
     end
-
-    return unless retrieved_chunks.any?
-
-    retrieved_chunks.map(&:content).join("\n\n")
   end
 
   def generate_prompt(context, question)

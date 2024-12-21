@@ -3,4 +3,8 @@ class Website < ApplicationRecord
   include Crawlable
 
   belongs_to :account
+
+  def context
+    data
+  end
 end
