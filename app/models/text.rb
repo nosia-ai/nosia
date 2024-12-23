@@ -4,6 +4,6 @@ class Text < ApplicationRecord
   belongs_to :account
 
   def context
-    body
+    data
   end
 end
