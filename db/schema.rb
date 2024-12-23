@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_18_200949) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_22_233312) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -329,7 +329,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_18_200949) do
   add_foreign_key "chats", "accounts"
   add_foreign_key "chats", "users"
   add_foreign_key "chunks", "accounts"
-  add_foreign_key "chunks", "documents", column: "chunkable_id"
   add_foreign_key "credentials", "users"
   add_foreign_key "documents", "accounts"
   add_foreign_key "documents", "authors"
