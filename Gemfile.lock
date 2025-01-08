@@ -380,7 +380,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sequel (5.68.0)
+    sequel (5.88.0)
+      bigdecimal
     solid_queue (1.0.0)
       activejob (>= 7.1)
       activerecord (>= 7.1)
@@ -488,7 +489,7 @@ DEPENDENCIES
   rss
   rubocop-rails-omakase
   selenium-webdriver
-  sequel (~> 5.68.0)
+  sequel (~> 5.88.0)
   solid_queue
   stimulus-rails
   tailwindcss-rails
