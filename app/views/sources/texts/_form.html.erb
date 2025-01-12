@@ -1,0 +1,6 @@
+<%= form_with(model: [:sources, text]) do |form| %>
+  <%= form.label :data, "Text" %>
+  <%= form.text_area :data %>
+
+  <%= form.submit "Save" %>
+<% end %>

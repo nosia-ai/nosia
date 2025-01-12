@@ -66,7 +66,7 @@
       </div>
       <div class="mt-auto w-full space-y-4 px-2 py-4">
         <% if Current.user.admin? %>
-          <%= link_to documents_path, class: "flex w-full gap-x-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-200 focus:outline-none dark:text-slate-200 dark:hover:bg-slate-800" do %>
+          <%= link_to sources_path, class: "flex w-full gap-x-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-200 focus:outline-none dark:text-slate-200 dark:hover:bg-slate-800" do %>
             <svg
               class="h-6 w-6"
               data-slot="icon"
@@ -83,7 +83,7 @@
                 stroke-linejoin="round"
               ></path>
             </svg>
-            Documents
+            Sources
           <% end %>
         <% end %>
         <%= link_to logout_path, data: { turbo_method: :delete }, class: "flex w-full gap-x-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-700 transition-colors duration-200 hover:bg-slate-200 focus:outline-none dark:text-slate-200 dark:hover:bg-slate-800" do %>

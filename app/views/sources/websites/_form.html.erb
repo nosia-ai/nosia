@@ -1,0 +1,6 @@
+<%= form_with(model: [:sources, website]) do |form| %>
+  <%= form.label :url, "URL" %>
+  <%= form.url_field :url %>
+
+  <%= form.submit "Save" %>
+<% end %>

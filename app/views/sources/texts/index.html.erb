@@ -1,0 +1,32 @@
+<section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-16">
+  <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+    <div class="sm:flex sm:items-center sm:justify-between sm:gap-4">
+      <p class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Texts</p>
+      <%= link_to "New text",
+      new_sources_text_path,
+      class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    </div>
+
+    <div
+      class="
+        mb-4 mt-6 grid grid-cols-1 gap-4 text-center sm:mt-8 sm:grid-cols-2 lg:mb-0
+        lg:grid-cols-4 xl:gap-8
+      "
+    >
+      <% @texts.each do |text| %>
+        <%= link_to sources_text_path(text), class: "
+    block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow
+    hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700
+  " do %>
+
+          <h5
+            class="
+              mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white
+            "
+          ><%= text.title %></h5>
+          <p class="font-normal text-gray-700 dark:text-gray-400"><%= text.resume %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>

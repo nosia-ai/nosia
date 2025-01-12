@@ -1,0 +1,9 @@
+<%= form_with(model: [:sources, qna]) do |form| %>
+  <%= form.label :question, "Question" %>
+  <%= form.text_field :question %>
+
+  <%= form.label :answer, "Answer" %>
+  <%= form.text_area :answer %>
+
+  <%= form.submit "Save" %>
+<% end %>

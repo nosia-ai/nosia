@@ -29,7 +29,13 @@ Rails.application.routes.draw do
   constraints Authentication::Admin do
     mount MissionControl::Jobs::Engine, at: "/jobs"
 
-    resources :documents
+    resource :sources, only: [ :show ]
+    namespace :sources do
+      resources :documents
+      resources :qnas
+      resources :texts
+      resources :websites
+    end
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
