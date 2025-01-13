@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   # User routes
   constraints Authentication::Authenticated do
+    resources :accounts, only: [ :index, :edit, :update ]
     resources :api_tokens, only: [ :index, :create, :destroy ]
     resources :chats, only: [ :show, :create, :destroy ] do
       resources :messages, only: [ :create ]
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
   constraints Authentication::Admin do
     mount MissionControl::Jobs::Engine, at: "/jobs"
 
-    resource :sources, only: [ :show ]
+    resource :settings, only: [ :show ]
     namespace :sources do
       resources :documents
       resources :qnas

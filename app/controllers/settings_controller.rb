@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SourcesController < ApplicationController
+class SettingsController < ApplicationController
   def show
   end
 end
