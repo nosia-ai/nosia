@@ -68,7 +68,7 @@ module Sources
 
     # Only allow a list of trusted parameters through.
     def text_params
-      params.require(:text).permit(:data).merge(account: Current.account)
+      params.require(:text).permit(:account_id, :data)
     end
   end
 end

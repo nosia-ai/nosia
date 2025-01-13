@@ -26,7 +26,7 @@ module Sources
 
       respond_to do |format|
         if @website.save
-          AddWebsiteJob.perform_later(@website.id)
+          CrawlWebsiteUrlsJob.perform_later(@website.id)
           format.html { redirect_to sources_website_url(@website), notice: "Website was successfully created." }
           format.json { render :show, status: :created, location: @website }
         else
@@ -40,7 +40,7 @@ module Sources
     def update
       respond_to do |format|
         if @website.update(website_params)
-          AddWebsiteJob.perform_later(@website.id)
+          CrawlWebsiteUrlJob.perform_later(@website.id)
           format.html { redirect_to sources_website_url(@website), notice: "Website was successfully updated." }
           format.json { render :show, status: :ok, location: @website }
         else
@@ -68,7 +68,7 @@ module Sources
 
     # Only allow a list of trusted parameters through.
     def website_params
-      params.require(:website).permit(:data, :url).merge(account: Current.account)
+      params.require(:website).permit(:account_id, :data, :url)
     end
   end
 end

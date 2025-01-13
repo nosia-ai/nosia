@@ -68,7 +68,9 @@ module Sources
 
     # Only allow a list of trusted parameters through.
     def document_params
-      params.require(:document).permit(:title, :file).merge(account: Current.account)
+      permitted = params.require(:document).permit(:account_id, :title, :file)
+      permitted = permitted.merge(account: Current.account) unless permitted.has_key?(:account_id)
+      permitted
     end
   end
 end

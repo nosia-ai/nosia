@@ -68,7 +68,7 @@ module Sources
 
     # Only allow a list of trusted parameters through.
     def qna_params
-      params.require(:qna).permit(:question, :answer).merge(account: Current.account)
+      params.require(:qna).permit(:account_id, :question, :answer)
     end
   end
 end
