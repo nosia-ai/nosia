@@ -11,6 +11,10 @@ class Document < ApplicationRecord
     content
   end
 
+  def resume
+    content&.first(50)
+  end
+
   def titlize!
     update(title: file.filename.to_s)
   end

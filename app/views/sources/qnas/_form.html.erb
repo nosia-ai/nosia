@@ -1,9 +1,15 @@
 <%= form_with(model: [:sources, qna]) do |form| %>
-  <%= form.label :question, "Question" %>
-  <%= form.text_field :question %>
+  <div class="n-form-field">
+    <%= form.label :question, "Question", class: "n-label" %>
+    <%= form.text_field :question, class: "n-field" %>
+  </div>
 
-  <%= form.label :answer, "Answer" %>
-  <%= form.text_area :answer %>
+  <div class="n-form-field">
+    <%= form.label :answer, "Answer", class: "n-label" %>
+    <%= form.text_area :answer, rows: 18, class: "n-textarea" %>
+  </div>
 
-  <%= form.submit "Save" %>
+  <div class="n-form-actions">
+    <%= form.submit "Save", class: "n-btn-primary" %>
+  </div>
 <% end %>

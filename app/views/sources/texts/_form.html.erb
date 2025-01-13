@@ -1,6 +1,10 @@
 <%= form_with(model: [:sources, text]) do |form| %>
-  <%= form.label :data, "Text" %>
-  <%= form.text_area :data %>
+  <div class="n-form-field">
+    <%= form.label :data, "Text", class: "n-label" %>
+    <%= form.text_area :data, rows: 18, class: "n-textarea" %>
+  </div>
 
-  <%= form.submit "Save" %>
+  <div class="n-form-actions">
+    <%= form.submit "Save", class: "n-btn-primary" %>
+  </div>
 <% end %>

@@ -13,6 +13,6 @@ class Website < ApplicationRecord
   end
 
   def title
-    url
+    data&.first(50) || url
   end
 end

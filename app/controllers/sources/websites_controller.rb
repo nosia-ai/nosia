@@ -68,7 +68,7 @@ module Sources
 
     # Only allow a list of trusted parameters through.
     def website_params
-      params.require(:website).permit(:url).merge(account: Current.account)
+      params.require(:website).permit(:data, :url).merge(account: Current.account)
     end
   end
 end
