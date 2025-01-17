@@ -10,12 +10,17 @@ class Account < ApplicationRecord
   has_many :texts, dependent: :destroy
   has_many :websites, dependent: :destroy
 
-  def context
+  def augmented_context
     context = []
     context << texts.map(&:context)
     context << qnas.map(&:context)
     context << documents.map(&:context)
-    context << websites.map(&:context)
-    context.join("\n\n")
+    context
+  end
+
+  def default_context
+    context = []
+    context << texts.map(&:context)
+    context
   end
 end
