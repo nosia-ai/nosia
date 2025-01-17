@@ -4,7 +4,7 @@ module Website::Crawlable
   def crawl_urls!
     urls.each do |website_url|
       website = Website.where(account: self.account, url: website_url).first_or_create
-      website.crawl_url! if website.new_record? || !website.data
+      CrawlWebsiteUrlJob.perform_later(website.id)
     end
   end
 
