@@ -49,7 +49,7 @@ module Website::Crawlable
   def extract_urls_from_sitemap(xml)
     doc = Nokogiri::XML(xml)
     namespace = { sitemap: "http://www.sitemaps.org/schemas/sitemap/0.9" }
-    doc.xpath("//sitemap:urlset/sitemap:url/sitemap:loc", namespace).map(&:text)
+    doc.xpath("//sitemap:urlset/sitemap:url/sitemap:loc", namespace).map(&:text).map(&:strip)
   end
 
   def fetch_robots_txt
