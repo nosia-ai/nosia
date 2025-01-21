@@ -43,11 +43,11 @@ curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-i
 You should see the following output:
 
 ```
-✅ Setting up environment
-✅ Setting up Docker
-✅ Setting up Ollama
-✅ Starting Ollama
-✅ Starting Nosia
+[x] Setting up environment
+[x] Setting up Docker
+[x] Setting up Ollama
+[x] Starting Ollama
+[x] Starting Nosia
 ```
 
 You can now access Nosia at `https://nosia.localhost`
@@ -126,11 +126,11 @@ curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-i
 You should see the following output:
 
 ```
-✅ Setting up environment
-✅ Setting up Docker
-✅ Setting up Ollama
-✅ Starting Ollama
-✅ Starting Nosia
+[x] Setting up environment
+[x] Setting up Docker
+[x] Setting up Ollama
+[x] Starting Ollama
+[x] Starting Nosia
 ```
 
 From the VM, you can access Nosia at `https://nosia.localhost`
