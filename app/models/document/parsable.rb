@@ -35,21 +35,19 @@ module Document::Parsable
     connection = Faraday.new(url: ENV["DOCLING_SERVE_BASE_URL"])
 
     base64_string = Base64.strict_encode64(self.file.download)
+    filename = self.file.filename.to_s
 
     request_body = {
-      file_source: {
-        base64_string:,
-        filename: self.file.filename.to_s
-      },
-      options: {
-        include_images: false,
-        output_docling_document: false,
-        output_markdown: true
-      }
+      file_sources: [
+        {
+          base64_string:,
+          filename:
+        }
+      ]
     }
 
     response = connection.post do |request|
-      request.url "/convert"
+      request.url "/convert/file"
       request.headers["Content-Type"] = "application/json"
       request.headers["Accept"] = "application/json"
       request.body = request_body.to_json

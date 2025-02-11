@@ -14,18 +14,15 @@ module Website::Crawlable
     connection = Faraday.new(url: ENV["DOCLING_SERVE_BASE_URL"])
 
     request_body = {
-      http_source: {
-        url: self.url,
-      },
-      options: {
-        include_images: false,
-        output_docling_document: false,
-        output_markdown: true
-      }
+      http_sources: [
+        {
+          url: self.url
+        }
+      ]
     }
 
     response = connection.post do |request|
-      request.url "/convert"
+      request.url "/convert/source"
       request.headers["Content-Type"] = "application/json"
       request.headers["Accept"] = "application/json"
       request.headers["User-Agent"] = "Nosiabot/0.1"
