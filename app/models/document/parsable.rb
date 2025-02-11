@@ -55,7 +55,7 @@ module Document::Parsable
 
     return unless response.success?
     parsed_response = JSON.parse(response.body)
-    self.content = parsed_response.dig("document", "markdown")
+    self.content = parsed_response.dig("document", "md_content")
     self.save!
   end
 end

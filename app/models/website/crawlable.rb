@@ -31,7 +31,7 @@ module Website::Crawlable
 
     return unless response.success?
     parsed_response = JSON.parse(response.body)
-    self.data = parsed_response.dig("document", "markdown")
+    self.data = parsed_response.dig("document", "md_content")
     self.save!
   end
 
