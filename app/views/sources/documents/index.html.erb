@@ -10,13 +10,37 @@
       class="dropzone dropzone-default dz-clickable n-dropzone"
     ></div>
 
-    <div class="n-cards-grid">
-      <% @documents.each do |document| %>
-        <%= link_to sources_document_path(document), class: "n-card" do %>
-          <h5 class="n-card-title"><%= document.title %></h5>
-          <p class="n-card-subtitle"><%= document.resume %></p>
-        <% end %>
-      <% end %>
+    <div class="n-table-container">
+      <table class="n-table">
+        <thead class="n-table-head">
+          <tr>
+            <th scope="col" class="n-table-head-th">
+              Title
+            </th>
+            <th scope="col" class="table-header-th">
+              Account
+            </th>
+            <th scope="col" class="n-table-head-th">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @documents.each do |document| %>
+            <tr class="n-tr">
+              <td class="n-td">
+                <%= document.title %>
+              </td>
+              <td class="n-td">
+                <%= document.account&.name %>
+              </td>
+              <td class="n-td">
+                <%= link_to "Show", sources_document_path(document), class: "n-btn-primary" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
