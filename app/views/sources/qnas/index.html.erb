@@ -4,14 +4,43 @@
       <p class="n-title">Q&As</p>
       <%= link_to "New Q&A", new_sources_qna_path, class: "n-btn-primary" %>
     </div>
-
-    <div class="n-cards-grid">
-      <% @qnas.each do |qna| %>
-        <%= link_to sources_qna_path(qna), class: "n-card" do %>
-          <h5 class="n-card-title"><%= qna.question %></h5>
-          <p class="n-card-subtitle"><%= qna.answer %></p>
-        <% end %>
-      <% end %>
+    <div class="n-table-container">
+      <table class="n-table">
+        <thead class="n-table-head">
+          <tr>
+            <th scope="col" class="n-table-head-th">
+              Question
+            </th>
+            <th scope="col" class="n-table-head-th">
+              Answer
+            </th>
+            <th scope="col" class="table-header-th">
+              Account
+            </th>
+            <th scope="col" class="n-table-head-th">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @qnas.each do |qna| %>
+            <tr class="n-tr">
+              <th scope="row" class="n-th">
+                <%= qna.question %>
+              </th>
+              <td class="n-td">
+                <%= qna.answer %>
+              </td>
+              <td class="n-td">
+                <%= qna.account&.name %>
+              </td>
+              <td class="n-td">
+                <%= link_to "Edit", edit_sources_qna_path(qna), class: "n-btn-primary" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
