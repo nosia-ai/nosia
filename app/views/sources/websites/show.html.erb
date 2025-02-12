@@ -1,8 +1,11 @@
 <section>
   <div class="n-form-container">
-    <h2 class="n-form-title">Website #<%= @website.id %></h2>
+    <h2 class="n-form-title">
+      Website #<%= @website.id %>&nbsp;:
+      <%= @website.title %>
+    </h2>
     <p class="n-form-content">
-      <%= @website.data %>
+      <%= @website.url %>
     </p>
     <div class="flex items-center space-x-4">
       <%= link_to edit_sources_website_path(@website), class: "n-btn-primary" do %>

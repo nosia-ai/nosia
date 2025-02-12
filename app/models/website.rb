@@ -8,11 +8,21 @@ class Website < ApplicationRecord
     data
   end
 
-  def resume
-    data&.first(50)
+  def title
+    return unless data.present?
+
+    document = Commonmarker.parse(data)
+
+    document.walk do |node|
+      if node.type == :heading && node.header_level == 1
+        return node.first_child.string_content
+      end
+    end
+
+    nil
   end
 
-  def title
-    data&.first(50) || url
+  def to_html
+    Commonmarker.to_html(data)
   end
 end

@@ -4,7 +4,7 @@ module Sources
 
     # GET /websites or /websites.json
     def index
-      @websites = Website.all
+      @websites = Website.all.order(:url)
     end
 
     # GET /websites/1 or /websites/1.json
