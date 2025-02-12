@@ -4,14 +4,37 @@
       <p class="n-title">Texts</p>
       <%= link_to "New text", new_sources_text_path, class: "n-btn-primary" %>
     </div>
-
-    <div class="n-cards-grid">
-      <% @texts.each do |text| %>
-        <%= link_to sources_text_path(text), class: "n-card" do %>
-          <h5 class="n-card-title"><%= text.title %></h5>
-          <p class="n-card-subtitle"><%= text.resume %></p>
-        <% end %>
-      <% end %>
+    <div class="n-table-container">
+      <table class="n-table">
+        <thead class="n-table-head">
+          <tr>
+            <th scope="col" class="n-table-head-th">
+              Text
+            </th>
+            <th scope="col" class="table-header-th">
+              Account
+            </th>
+            <th scope="col" class="n-table-head-th">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @texts.each do |text| %>
+            <tr class="n-tr">
+              <td class="n-td">
+                <%= text.data %>
+              </td>
+              <td class="n-td">
+                <%= text.account&.name %>
+              </td>
+              <td class="n-td">
+                <%= link_to "Edit", edit_sources_text_path(text), class: "n-btn-primary" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
