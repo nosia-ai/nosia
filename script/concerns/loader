@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 play_loader_loop() {
-  local animation=(⌛️ ⏳ ⌛️ ⏳)
+  local animation=(| / - \)
 
   while true; do
     for frame in "${animation[@]}"; do
@@ -20,7 +20,7 @@ start_loader() {
 }
 
 stop_loader() {
-  printf "\r✅"
+  printf "\r[x]"
   kill "${loader_pid}" &>/dev/null
   printf "\n"
   tput cnorm # Restore the terminal cursor
