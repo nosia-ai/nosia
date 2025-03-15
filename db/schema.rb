@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_22_233312) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_30_191813) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -137,6 +137,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_22_233312) do
     t.datetime "updated_at", null: false
     t.string "similar_document_ids", default: [], array: true
     t.boolean "done", default: false
+    t.string "similar_chunk_ids", default: [], array: true
     t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 

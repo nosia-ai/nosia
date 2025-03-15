@@ -32,7 +32,10 @@ module Document::Parsable
   end
 
   def parse_with_docling
-    connection = Faraday.new(url: ENV["DOCLING_SERVE_BASE_URL"])
+    connection = Faraday.new(url: ENV["DOCLING_SERVE_BASE_URL"]) do |faraday|
+      faraday.options.timeout = 600
+      faraday.options.open_timeout = 10
+    end
 
     base64_string = Base64.strict_encode64(self.file.download)
     filename = self.file.filename.to_s
@@ -47,7 +50,7 @@ module Document::Parsable
     }
 
     response = connection.post do |request|
-      request.url "/convert/file"
+      request.url "/v1alpha/convert/file"
       request.headers["Content-Type"] = "application/json"
       request.headers["Accept"] = "application/json"
       request.body = request_body.to_json
