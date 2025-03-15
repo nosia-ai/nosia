@@ -92,6 +92,26 @@ curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-i
 
 At this time, the `nomic-embed-text` embeddings model is required for Nosia to work.
 
+If you use new dimensions by using a new embeddings model, you'll need to:
+
+1. Change the `EMBEDDING_DIMENSIONS` environment variable.
+
+2. Re-execute the change vector limit database migration:
+
+```bash
+bin/rails db:migrate:redo:primary VERSION=20241216213448
+```
+
+3. Re-vectorize your chunks (this could take a while):
+
+```bash
+bin/rails c
+```
+
+```ruby
+Document.find_each(&:vectorize!)
+```
+
 ### Advanced installation
 
 ### On a macOS with a Debian or Ubuntu VM

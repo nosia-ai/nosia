@@ -66,7 +66,7 @@ module Chat::Ollama
     end
 
     if checked_chunks.any?
-      assistant_response.update(similar_document_ids: checked_chunks.pluck(:document_id).uniq)
+      assistant_response.update(similar_chunk_ids: checked_chunks.pluck(:id).uniq)
 
       context << checked_chunks.map(&:content).join("\n\n")
       context = context.join("\n\n")
@@ -76,7 +76,7 @@ module Chat::Ollama
       prompt = prompt.gsub("{question}", question)
 
       messages_for_assistant.pop
-      messages << { role: "user", content: prompt }
+      messages_for_assistant << { role: "user", content: prompt }
     end
 
     messages_for_assistant = messages_for_assistant.flatten
