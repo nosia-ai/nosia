@@ -8,7 +8,7 @@ fi
 if [ -n "$LLM_MODEL" ]; then
   ollama pull $LLM_MODEL
 else
-  ollama pull qwen2.5
+  ollama pull mistral-small3.2
 fi
 ollama pull bespoke-minicheck
 ollama pull nomic-embed-text

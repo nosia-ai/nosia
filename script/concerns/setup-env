@@ -25,7 +25,7 @@ if [ -n "$LLM_MODEL" ]; then
   echo "Using LLM_MODEL from environment"
 else
   echo "LLM_MODEL is not set, using default value"
-  LLM_MODEL=qwen2.5
+  LLM_MODEL=mistral-small3.2
 fi
 
 if [ -n "$CHECK_MODEL" ]; then
