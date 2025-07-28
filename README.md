@@ -73,7 +73,7 @@ curl -fsSL https://raw.githubusercontent.com/nosia-ai/nosia-install/main/nosia-i
 
 By default, Nosia uses:
 
-1. Completion model: `qwen2.5`
+1. Completion model: `mistral-small3.2`
 1. Embeddings model: `nomic-embed-text`
 1. Checking model: `bespoke-minicheck`
 
@@ -128,7 +128,7 @@ Replace `$OLLAMA_HOST_IP` with the IP address of the Ollama host machine and run
 
 ```bash
 brew install ollama
-ollama pull qwen2.5
+ollama pull mistral-small3.2
 ollama pull bespoke-minicheck
 ollama pull nomic-embed-text
 OLLAMA_BASE_URL=$OLLAMA_HOST_IP:11434 OLLAMA_MAX_LOADED_MODELS=3 ollama serve

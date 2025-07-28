@@ -9,8 +9,8 @@ module Chat::Ollama
           uri_base: ENV.fetch("OLLAMA_BASE_URL", "http://localhost:11434")
         },
         default_options: {
-          chat_completion_model_name: ENV.fetch("LLM_MODEL", "qwen2.5"),
-          completion_model_name: ENV.fetch("LLM_MODEL", "qwen2.5"),
+          chat_completion_model_name: ENV.fetch("LLM_MODEL", "mistral-small3.2"),
+          completion_model_name: ENV.fetch("LLM_MODEL", "mistral-small3.2"),
           embeddings_model_name: ENV.fetch("EMBEDDING_MODEL", "nomic-embed-text"),
           temperature: ENV.fetch("LLM_TEMPERATURE", 0.1).to_f,
           num_ctx: ENV.fetch("LLM_NUM_CTX", 4_096).to_i
