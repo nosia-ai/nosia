@@ -247,8 +247,8 @@ GEM
     minitest (5.25.5)
     msgpack (1.8.0)
     multipart-post (2.4.1)
-    neighbor (0.5.2)
-      activerecord (>= 7)
+    neighbor (0.6.0)
+      activerecord (>= 7.1)
     net-http (0.6.0)
       uri
     net-imap (0.5.9)
