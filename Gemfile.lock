@@ -29,10 +29,10 @@ GIT
 
 GIT
   remote: https://github.com/rails/mission_control-jobs.git
-  revision: 58893d968189b494170f558ade76514804eb33ca
+  revision: 9fa76f054c38b1e24b5b8d2c1c63b513ed87c452
   branch: main
   specs:
-    mission_control-jobs (1.0.2)
+    mission_control-jobs (1.1.0)
       actioncable (>= 7.1)
       actionpack (>= 7.1)
       activejob (>= 7.1)
