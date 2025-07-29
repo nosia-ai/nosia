@@ -293,7 +293,11 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
-    pg (1.5.9)
+    pg (1.6.0)
+    pg (1.6.0-aarch64-linux)
+    pg (1.6.0-arm64-darwin)
+    pg (1.6.0-x86_64-darwin)
+    pg (1.6.0-x86_64-linux)
     pgvector (0.3.2)
     pp (0.6.2)
       prettyprint
@@ -508,7 +512,7 @@ DEPENDENCIES
   neighbor
   passwordless
   pdf-reader
-  pg (~> 1.1)
+  pg (~> 1.6)
   pgvector (~> 0.2)
   propshaft
   puma (>= 5.0)
